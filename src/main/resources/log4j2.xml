@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorinterval="30" status="info" strict="true">
+
+    <Properties>
+        <Property name="LOG_PATTERN">[%d{yyyy-MM-dd 'T'HH:mm:ss}] - %m%n</Property>
+        <Property name="LOG_ROOT">${sys:catalina.home}/logs/cinema</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Appender type="Console" name="Console">
+            <Layout type="PatternLayout" pattern="${LOG_PATTERN}"/>
+        </Appender>
+
+        <Appender type="File" name="File" fileName="${LOG_ROOT}/log.txt">
+            <Layout type="PatternLayout" pattern="${LOG_PATTERN}"/>
+        </Appender>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="model.dao.connection.ConnDB" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <Logger name="controller.commandList.CommandFactory" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <Logger name="model.dao.DAOFactory" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <Logger name="model.dao.AbstractDAO" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <Logger name="serviceList.ServiceFactory" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="Console"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>
