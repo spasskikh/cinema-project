@@ -1,15 +1,16 @@
 package com.cinema.controller.command.impl;
 
 import com.cinema.controller.command.Command;
+import com.cinema.util.constants.PagesKey;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class Movie implements Command {
+public class ViewRegistrationPage implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/jsp/movie.jsp").forward(req, resp);
+        req.getRequestDispatcher(PagesKey.REGISTRATION_PAGE.toString()).forward(req, resp);
     }
 }

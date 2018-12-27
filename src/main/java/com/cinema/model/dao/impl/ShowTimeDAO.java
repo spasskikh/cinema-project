@@ -3,7 +3,7 @@ package com.cinema.model.dao.impl;
 import com.cinema.exception.NoSuchDAOExc;
 import com.cinema.model.dao.AbstractDAO;
 import com.cinema.model.entity.ShowTime;
-import com.cinema.util.SessionBuilder;
+import com.cinema.util.ShowTimeBuilder;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -101,19 +101,21 @@ public class ShowTimeDAO extends AbstractDAO<ShowTime> {
     }
 
     private ShowTime createSession(ResultSet resultSet) throws SQLException {
-        SessionBuilder builder = new SessionBuilder();
+        ShowTime showTime = null;
 
         try {
-            builder.buildId(resultSet.getInt("ID"));
-            builder.buildDate(resultSet.getString("DATE"));
-            builder.buildMovie(resultSet.getInt("MOVIE_ID"));
-            builder.buildUser(resultSet.getInt("USER_ID"));
-            builder.buildTimeSlot(resultSet.getInt("TIME_SLOTS_ID"));
-            builder.buildSeat(resultSet.getInt("SEATS_ID"));
+            showTime = new ShowTimeBuilder()
+                    .buildId(resultSet.getInt("ID"))
+                    .buildDate(resultSet.getString("DATE"))
+                    .buildMovie(resultSet.getInt("MOVIE_ID"))
+                    .buildUser(resultSet.getInt("USER_ID"))
+                    .buildTimeSlot(resultSet.getInt("TIME_SLOTS_ID"))
+                    .buildSeat(resultSet.getInt("SEATS_ID"))
+                    .build();
         } catch (NoSuchDAOExc exc) {
             logger.error(exc);
         }
-        return builder.getShowTime();
+        return showTime;
     }
 
 }

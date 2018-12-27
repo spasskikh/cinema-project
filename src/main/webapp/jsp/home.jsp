@@ -12,9 +12,10 @@
 <h2 align="center">Best Cinema</h2>
 
 
-<h4><a href="home?command=Login">LOGIN</a>   <a href="home?command=Register">REGISTER</a></h4>
+<h4><a href="home?command=view_login_page">LOGIN</a>   <a href="home?command=view_registration_page">REGISTER</a></h4>
 
 <c:out value="${user.login}" />
+
 <table>
     <c:forEach items="${movies}" var="movie">
         <tr>

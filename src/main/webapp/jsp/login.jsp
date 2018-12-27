@@ -4,9 +4,9 @@
     <title>Login</title>
 </head>
 <body>
-<h4><a href="home?command=GetAllMovies">HOME</a></h4>
+<h4><a href="home?command=view_home_page">HOME</a></h4>
 
-<form method="post" action="home?command=Login">
+<form method="post" action="home?command=view_login_page">
     <div class="form-group">
         <label class="col-md-2">Login:</label>
         <input placeholder="login" id="Login" name="Login" required="required"/>

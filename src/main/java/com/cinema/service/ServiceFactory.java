@@ -1,27 +1,39 @@
 package com.cinema.service;
 
-
-import com.cinema.exception.NoSuchServiceExc;
 import com.cinema.service.impl.MovieService;
 import com.cinema.service.impl.UserService;
+import com.cinema.util.constants.ServicesKey;
 
+import static com.cinema.util.constants.ServicesKey.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * class contains instances of service classes
+ *
+ * @author Anton Spasskikh
+ */
 public class ServiceFactory {
 
-    private enum ServiceList {
-        MOVIE_SERVICE, USER_SERVICE
+    /**
+     * Map for instances
+     */
+    private static Map<ServicesKey, Service> services;
+
+    static {
+        services = new HashMap<>();
+        services.put(MOVIE_SERVICE, new MovieService());
+        services.put(USER_SERVICE, new UserService());
     }
 
-    public static Service getService(String id){
-
-        ServiceList serviceList = ServiceList.valueOf(id.toUpperCase());
-
-        switch (serviceList) {
-            case MOVIE_SERVICE:
-                return new MovieService();
-            case USER_SERVICE:
-                return new UserService();
-            default:
-                throw new NoSuchServiceExc("No such serviceList: " + id);
-        }
+    /**
+     * defines service
+     *
+     * @param name service identifier
+     * @return service entity
+     */
+    public static Service getService(ServicesKey name) {
+        return services.get(name);
     }
 }

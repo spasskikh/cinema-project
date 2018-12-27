@@ -11,40 +11,45 @@ import com.cinema.model.entity.ShowTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class SessionBuilder {
+public class ShowTimeBuilder {
 
     private ShowTime showTime = new ShowTime();
 //method should return builder class
-    public ShowTime getShowTime() {
+    public ShowTime build() {
         return showTime;
     }
 
-    public void buildId(Integer id) {
+    public ShowTimeBuilder buildId(Integer id) {
         showTime.setId(id);
+        return this;
     }
 
-    public void buildDate(String date) {
+    public ShowTimeBuilder buildDate(String date) {
         showTime.setDate(LocalDate.parse(date, DateTimeFormatter.ISO_DATE));
+        return this;
     }
 
-    public void buildMovie(Integer movieId) throws NoSuchDAOExc {
+    public ShowTimeBuilder buildMovie(Integer movieId) throws NoSuchDAOExc {
         MoviesDAO moviesDAO = (MoviesDAO) DAOFactory.getDAO("movies");
         showTime.setMovie(moviesDAO.read(movieId));
+        return this;
     }
 
-    public void buildTimeSlot(Integer timeSlotId) throws NoSuchDAOExc {
+    public ShowTimeBuilder buildTimeSlot(Integer timeSlotId) throws NoSuchDAOExc {
         TimeSlotsDAO timeSlotsDAO = (TimeSlotsDAO) DAOFactory.getDAO("time_slots");
         showTime.setTimeSlot(timeSlotsDAO.read(timeSlotId));
+        return this;
     }
 
-    public void buildSeat(Integer seatId) throws NoSuchDAOExc {
+    public ShowTimeBuilder buildSeat(Integer seatId) throws NoSuchDAOExc {
         SeatsDAO seatsDAO = (SeatsDAO) DAOFactory.getDAO("seats");
         showTime.setSeat(seatsDAO.read(seatId));
+        return this;
     }
 
-    public void buildUser(Integer userId) throws NoSuchDAOExc {
+    public ShowTimeBuilder buildUser(Integer userId) throws NoSuchDAOExc {
         UsersDAO usersDAO = (UsersDAO) DAOFactory.getDAO("users");
         showTime.setUser(usersDAO.read(userId));
-
+        return this;
     }
 }
