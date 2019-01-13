@@ -9,8 +9,6 @@
     <fmt:message key="date" var="dateLoc"/>
     <fmt:message key="time" var="timeLoc"/>
     <fmt:message key="seat" var="seatLoc"/>
-    <fmt:message key="next" var="nextLoc"/>
-    <fmt:message key="previous" var="previousLoc"/>
 </fmt:bundle>
 
 

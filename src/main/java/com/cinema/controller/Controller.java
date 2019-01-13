@@ -33,6 +33,7 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         process(req, resp);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -44,16 +45,11 @@ public class Controller extends HttpServlet {
     /**
      * defines command and executes it
      *
-     * @param req
-     *            request from client to server
-     * @param resp
-     *            response from server to client
-     * @throws ServletException
-     *             if ServletException occurs
-     * @throws IOException
-     *             if IOException occurs
-     * @throws NullPointerException
-     *             if NullPointer occurs
+     * @param req  request from client to server
+     * @param resp response from server to client
+     * @throws ServletException     if ServletException occurs
+     * @throws IOException          if IOException occurs
+     * @throws NullPointerException if NullPointer occurs
      */
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
