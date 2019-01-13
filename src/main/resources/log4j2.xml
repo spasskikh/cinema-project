@@ -20,24 +20,23 @@
 
     <Loggers>
 
-        <Logger name="model.dao.connection.ConnDB" level="info" additivity="false">
+        <Logger name="com.cinema.model.dao.connection.ConnDB" level="error" additivity="false">
             <AppenderRef ref="File"/>
         </Logger>
 
-        <Logger name="controller.commandList.CommandFactory" level="info" additivity="false">
+        <Logger name="com.cinema.model.dao.AbstractDAO" level="info" additivity="false">
             <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
         </Logger>
 
-        <Logger name="model.dao.DAOFactory" level="info" additivity="false">
+        <Logger name="com.cinema.controller.Controller" level="info" additivity="false">
             <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
         </Logger>
 
-        <Logger name="model.dao.AbstractDAO" level="info" additivity="false">
+        <Logger name="com.cinema.service.impl.MovieService" level="info" additivity="false">
             <AppenderRef ref="File"/>
-        </Logger>
-
-        <Logger name="serviceList.ServiceFactory" level="info" additivity="false">
-            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
         </Logger>
 
         <Root level="error">

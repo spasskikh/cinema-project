@@ -9,14 +9,32 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Class provides connections to database
+ *
+ * @author Anton Spasskikh
+ */
 public class ConnDB {
 
+    /**
+     * datasource field
+     */
     private static volatile DataSource dataSource;
-    private static Logger logger =  LogManager.getLogger(ConnDB.class);
 
+    /**
+     * logger field
+     */
+    private static Logger logger = LogManager.getLogger(ConnDB.class);
+
+    /**
+     * private constructor without parameters
+     */
     private ConnDB() {
     }
 
+    /**
+     * @return {@link #dataSource}
+     */
     private static DataSource getDataSource() {
         if (dataSource == null) {
             synchronized (ConnDB.class) {
@@ -41,12 +59,18 @@ public class ConnDB {
         return dataSource;
     }
 
+    /**
+     * returns connection instance
+     *
+     * @return connection
+     * @throws NullPointerException if get connection is impossible
+     */
     public static Connection getConnection() {
         try {
             return getDataSource().getConnection();
-        } catch (SQLException e) {
-           logger.error(e);
-           throw new RuntimeException(e);
+        } catch (SQLException exc) {
+            logger.error(exc.getMessage(),exc);
+            throw new NullPointerException();
         }
     }
 }

@@ -1,77 +1,88 @@
 package com.cinema.model.dao.impl;
 
-import com.cinema.exception.NoSuchDAOExc;
 import com.cinema.model.dao.AbstractDAO;
 import com.cinema.model.entity.ShowTime;
-import com.cinema.util.ShowTimeBuilder;
+import com.cinema.util.builder.ShowTimeBuilder;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class provides operations for working with SHOWTIME table in database
+ *
+ * @author Anton Spasskikh
+ */
 public class ShowTimeDAO extends AbstractDAO<ShowTime> {
 
+    /**
+     * date and time formatter field
+     */
+    private DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void create(ShowTime showTime) {
         try (PreparedStatement st = conn.prepareStatement(
-                "INSERT INTO cinema.SHOWTIME " +
-                        "(ID, DATE, MOVIE_ID, USER_ID, TIME_SLOTS_ID, SEAT_ID) " +
-                        "VALUES (?, ?, ?, ?, ?, ?)")) {
-            st.setInt(1, showTime.getId());
-            st.setString(2, showTime.getDate().format(DateTimeFormatter.ISO_DATE));
-            st.setInt(3, showTime.getMovie().getId());
-            st.setString(4, "NULL");
-            st.setInt(4, showTime.getTimeSlot().getId());
-            st.setInt(5, showTime.getSeat().getId());
+                "INSERT INTO cinema.SHOWTIME (DATE, MOVIE_ID, TIME_SLOT_ID) VALUES (?, ?, ?)")) {
+            st.setString(1, showTime.getDate().format(formatter));
+            st.setInt(2, showTime.getMovie().getId());
+            st.setInt(3, showTime.getTimeSlot().getId());
 
             st.execute();
         } catch (SQLException | NullPointerException exc) {
-            logger.error(exc);
+            logger.error(exc.getMessage(), exc);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ShowTime read(Integer id) {
         try (PreparedStatement st = conn.prepareStatement(
                 "SELECT * FROM cinema.SHOWTIME WHERE ID = ?")) {
             st.setInt(1, id);
             ResultSet resultSet = st.executeQuery();
-            resultSet.next();
-            return createSession(resultSet);
+            if (resultSet.next()) {
+                return createShowTime(resultSet);
+            }
         } catch (SQLException exc) {
-            logger.error(exc);
-            return null;
+            logger.error(exc.getMessage(), exc);
         }
+        return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(ShowTime showTime) {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.SHOWTIME" +
-                        " SET" +
-                        "  DATE = ?" +
-                        " ,MOVIE_ID = ?" +
-                        " ,USER_ID = ?" +
-                        " ,TIME_SLOTS_ID = ?" +
-                        " ,SEAT_ID = ?" +
+                        " SET DATE = ?, MOVIE_ID = ?, TIME_SLOT_ID = ?" +
                         "WHERE ID = ?")) {
-            st.setString(1, showTime.getDate().format(DateTimeFormatter.ISO_DATE));
+            st.setString(1, showTime.getDate().format(formatter));
             st.setInt(2, showTime.getMovie().getId());
-            st.setInt(3, showTime.getUser().getId());
-            st.setInt(4, showTime.getTimeSlot().getId());
-            st.setInt(5, showTime.getSeat().getId());
-            st.setInt(6, showTime.getId());
+            st.setInt(3, showTime.getTimeSlot().getId());
+            st.setInt(4, showTime.getId());
 
             st.execute();
         } catch (SQLException exc) {
-            logger.error(exc);
+            logger.error(exc.getMessage(), exc);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(ShowTime showTime) {
         try (PreparedStatement st = conn.prepareStatement(
@@ -80,10 +91,13 @@ public class ShowTimeDAO extends AbstractDAO<ShowTime> {
 
             st.execute();
         } catch (SQLException exc) {
-            logger.error(exc);
+            logger.error(exc.getMessage(), exc);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ShowTime> getAll() {
         List<ShowTime> list = new ArrayList<>();
@@ -92,30 +106,27 @@ public class ShowTimeDAO extends AbstractDAO<ShowTime> {
             ResultSet resultSet = st.executeQuery("SELECT * FROM cinema.SHOWTIME");
 
             while (resultSet.next()) {
-                list.add(createSession(resultSet));
+                list.add(createShowTime(resultSet));
             }
         } catch (SQLException exc) {
-            logger.error(exc);
+            logger.error(exc.getMessage(), exc);
         }
         return list;
     }
 
-    private ShowTime createSession(ResultSet resultSet) throws SQLException {
-        ShowTime showTime = null;
-
-        try {
-            showTime = new ShowTimeBuilder()
-                    .buildId(resultSet.getInt("ID"))
-                    .buildDate(resultSet.getString("DATE"))
-                    .buildMovie(resultSet.getInt("MOVIE_ID"))
-                    .buildUser(resultSet.getInt("USER_ID"))
-                    .buildTimeSlot(resultSet.getInt("TIME_SLOTS_ID"))
-                    .buildSeat(resultSet.getInt("SEATS_ID"))
-                    .build();
-        } catch (NoSuchDAOExc exc) {
-            logger.error(exc);
-        }
-        return showTime;
+    /**
+     * creates entity
+     *
+     * @param resultSet query result set
+     * @return entity
+     */
+    private ShowTime createShowTime(ResultSet resultSet) throws SQLException {
+        ShowTimeBuilder builder = new ShowTimeBuilder();
+        return builder
+                .buildId(resultSet.getInt("ID"))
+                .buildDate(resultSet.getString("DATE"))
+                .buildMovie(resultSet.getInt("MOVIE_ID"))
+                .buildTimeSlot(resultSet.getInt("TIME_SLOT_ID"))
+                .build();
     }
-
 }

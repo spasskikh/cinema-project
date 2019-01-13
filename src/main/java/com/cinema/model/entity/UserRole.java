@@ -1,16 +1,87 @@
 package com.cinema.model.entity;
 
-public enum UserRole {
-    ADMIN(1),
-    USER(2);
+import java.util.Objects;
 
-    private int id;
+/**
+ * Class describing user role entity
+ *
+ * @author Anton Spasskikh
+ */
+public class UserRole {
 
-    UserRole(int id) {
+    /**
+     * user role id field
+     */
+    private Integer id;
+
+    /**
+     * user role name field
+     */
+    private String roleName;
+
+    /**
+     * constructor without parameters
+     */
+    public UserRole() {
+    }
+
+    /**
+     * constructor with parameters, sets all fields
+     */
+    public UserRole(Integer id, String roleName) {
+        this.id = id;
+        this.roleName = roleName;
+    }
+
+    /**
+     * @return {@link #id}
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * sets user role id
+     *
+     * @param id {@link #id}
+     */
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
-        return id;
+    /**
+     * @return {@link #roleName}
+     */
+    public String getRoleName() {
+        return roleName;
+    }
+
+    /**
+     * sets user role name
+     *
+     * @param roleName {@link #roleName}
+     */
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserRole userRole = (UserRole) o;
+        return Objects.equals(id, userRole.id) &&
+                Objects.equals(roleName, userRole.roleName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, roleName);
     }
 }

@@ -13,7 +13,7 @@ public class CommandManager {
      * @param commandName command name for redirect
      * @return direction for redirect
      */
-    public static String getLocationForRedirect(String commandName) {
+    public static String getRedirect(String commandName) {
         return "home?command=" + commandName;
     }
 }

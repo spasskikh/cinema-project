@@ -1,73 +1,119 @@
 package com.cinema.model.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
+/**
+ * Class describing user entity
+ *
+ * @author Anton Spasskikh
+ */
 public class ShowTime {
 
     private Integer id;
     private LocalDate date;
     private Movie movie;
-    private User user;
     private TimeSlot timeSlot;
-    private Seat seat;
 
+    /**
+     * constructor without parameters
+     */
     public ShowTime() {
     }
 
-    public ShowTime(Integer id, LocalDate date, Movie movie, User user, TimeSlot timeSlot, Seat seat) {
+    /**
+     * constructor with parameters, sets all fields
+     */
+    public ShowTime(Integer id, LocalDate date, Movie movie, TimeSlot timeSlot) {
         this.id = id;
         this.date = date;
         this.movie = movie;
-        this.user = user;
         this.timeSlot = timeSlot;
-        this.seat = seat;
     }
 
+    /**
+     * @return {@link #id}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * sets showtime id
+     *
+     * @param id {@link #id}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * @return {@link #date}
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * sets showtime date
+     *
+     * @param date {@link #date}
+     */
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
+    /**
+     * @return {@link #movie}
+     */
     public Movie getMovie() {
         return movie;
     }
 
+    /**
+     * sets showtime movie
+     *
+     * @param movie {@link #movie}
+     */
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    /**
+     * @return {@link #timeSlot}
+     */
     public TimeSlot getTimeSlot() {
         return timeSlot;
     }
 
+    /**
+     * sets showtime time slot
+     *
+     * @param timeSlot {@link #timeSlot}
+     */
     public void setTimeSlot(TimeSlot timeSlot) {
         this.timeSlot = timeSlot;
     }
 
-    public Seat getSeat() {
-        return seat;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShowTime showTime = (ShowTime) o;
+        return Objects.equals(id, showTime.id) &&
+                Objects.equals(date, showTime.date) &&
+                Objects.equals(movie, showTime.movie) &&
+                Objects.equals(timeSlot, showTime.timeSlot);
     }
 
-    public void setSeat(Seat seat) {
-        this.seat = seat;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date, movie, timeSlot);
     }
 }
