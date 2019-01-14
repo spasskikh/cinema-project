@@ -22,7 +22,7 @@ public class ViewRegistrationPage implements Command {
     /**
      * user service field
      */
-    private UserService userService = (UserService) ServiceFactory.getService(ServiceKey.USER_SERVICE);
+    UserService userService = (UserService) ServiceFactory.getService(ServiceKey.USER_SERVICE);
 
     /**
      * {@inheritDoc}

@@ -8,6 +8,7 @@ import com.cinema.util.Validator;
 import com.cinema.util.constants.DAOKey;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import com.cinema.service.Service;
+import org.jasypt.util.password.PasswordEncryptor;
 
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class UserService implements Service {
     /**
      * userDAO field
      */
-    private UserDAO userDAO;
+    UserDAO userDAO;
 
     /**
      * basic password encryptor field
      */
-    private BasicPasswordEncryptor bpe;
+    PasswordEncryptor bpe;
 
     /**
      * constructor without parameters, initializes {@link #userDAO} and {@link #bpe}

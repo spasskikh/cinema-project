@@ -26,7 +26,7 @@ public class MovieService implements Service {
     /**
      * movieDAO field
      */
-    private MovieDAO movieDAO;
+    MovieDAO movieDAO;
 
     /**
      * constructor without parameters, initializes {@link #movieDAO}

@@ -23,7 +23,7 @@ public class AddNewMovie implements Command {
     /**
      * movie service field
      */
-    private MovieService movieService = (MovieService) ServiceFactory.getService(ServiceKey.MOVIE_SERVICE);
+    MovieService movieService = (MovieService) ServiceFactory.getService(ServiceKey.MOVIE_SERVICE);
 
     /**
      * {@inheritDoc}
