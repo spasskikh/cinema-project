@@ -9,6 +9,7 @@ import com.cinema.service.impl.OrderService;
 import com.cinema.service.impl.SeatService;
 import com.cinema.service.impl.ShowTimeService;
 import com.cinema.util.CommandManager;
+import com.cinema.util.ResourceManager;
 import com.cinema.util.constants.CommandKey;
 import com.cinema.util.constants.PageKey;
 import com.cinema.util.constants.ServiceKey;
@@ -16,7 +17,9 @@ import com.cinema.util.constants.ServiceKey;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -47,7 +50,8 @@ public class OrderTicket implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getMethod().equalsIgnoreCase("POST")) {
-            User user = (User) req.getSession().getAttribute("user");
+            HttpSession session = req.getSession();
+            User user = (User) session.getAttribute("user");
             if (user == null) {
                 resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMM_VIEW_LOGIN_PAGE.toString()));
                 return;
@@ -55,9 +59,14 @@ public class OrderTicket implements Command {
 
             Seat seat = seatService.getSeat(Integer.parseInt(req.getParameter("seatId")));
             ShowTime showTime = showTimeService.getShowTime(Integer.parseInt(req.getParameter("showTimeId")));
+            if (orderService.exists(showTime, seat)) {
+                session.setAttribute("orderStatus", ResourceManager.INSTANCE.getValue("order.ticket.unavailableOrder"));
+                resp.sendRedirect(req.getHeader("Referer"));
+                return;
+            }
             orderService.create(user, showTime, seat);
-
-            resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMM_VIEW_HOME_PAGE.toString()));
+            session.setAttribute("orderStatus", ResourceManager.INSTANCE.getValue("order.ticket.successOrder"));
+            resp.sendRedirect(req.getHeader("Referer"));
         } else {
             String showTimeId = req.getParameter("showTimeId");
             ShowTime showTime = showTimeService.getShowTime(Integer.parseInt(showTimeId));

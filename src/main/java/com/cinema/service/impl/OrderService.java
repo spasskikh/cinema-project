@@ -68,4 +68,20 @@ public class OrderService implements Service {
 
         orderDAO.create(order);
     }
+
+    /**
+     * checks if order already exists
+     *
+     * @param showTime order user
+     * @param seat     order seat
+     * @return true if exists
+     */
+    public boolean exists(ShowTime showTime, Seat seat) {
+        for (Order order : getAlreadyBought(showTime)) {
+            if (order.getSeat().equals(seat)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

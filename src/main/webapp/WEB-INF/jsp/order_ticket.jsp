@@ -14,6 +14,8 @@
 
 <c:import url="../jsp/header.jsp"/>
 
+${orderStatus}<br/>
+
 <table>
     <tr>
         <td>${showTime.date}</td>
