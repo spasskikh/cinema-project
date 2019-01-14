@@ -58,7 +58,7 @@ public class SeatDAO extends AbstractDAO<Seat> {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.SEAT" +
                         " SET NUMBER = ?" +
-                        "WHERE ID = ?")) {
+                        " WHERE ID = ?")) {
             st.setInt(1, seat.getNumber());
             st.setInt(2, seat.getId());
 

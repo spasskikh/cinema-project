@@ -68,7 +68,7 @@ public class ShowTimeDAO extends AbstractDAO<ShowTime> {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.SHOWTIME" +
                         " SET DATE = ?, MOVIE_ID = ?, TIME_SLOT_ID = ?" +
-                        "WHERE ID = ?")) {
+                        " WHERE ID = ?")) {
             st.setString(1, showTime.getDate().format(formatter));
             st.setInt(2, showTime.getMovie().getId());
             st.setInt(3, showTime.getTimeSlot().getId());

@@ -67,7 +67,7 @@ public class TimeSlotDAO extends AbstractDAO<TimeSlot> {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.TIME_SLOT" +
                         " SET TIME_FROM = ?, TIME_TILL = ?, DURATION = ?" +
-                        "WHERE ID = ?")) {
+                        " WHERE ID = ?")) {
             st.setString(1, timeSlot.getFrom().format(formatter));
             st.setString(2, timeSlot.getTill().format(formatter));
             st.setInt(3, timeSlot.getDuration());

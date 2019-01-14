@@ -61,7 +61,7 @@ public class UserDAO extends AbstractDAO<User> {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.USER" +
                         " SET LOGIN = ?, PASSWORD = ?, ROLE_ID = ?" +
-                        "WHERE ID = ?")) {
+                        " WHERE ID = ?")) {
             st.setString(1, user.getLogin());
             st.setString(2, user.getPassword());
             st.setInt(3, user.getRole().getId());

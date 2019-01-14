@@ -70,7 +70,7 @@ public class OrderDAO extends AbstractDAO<Order> {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.ORDER" +
                         " SET DATE = ?, USER_ID = ?, SHOWTIME_ID = ?, SEAT_ID = ?" +
-                        "WHERE ID = ?")) {
+                        " WHERE ID = ?")) {
             st.setString(1, order.getDate().format(formatter));
             st.setInt(2, order.getUser().getId());
             st.setInt(3, order.getShowTime().getId());

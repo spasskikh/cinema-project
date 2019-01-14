@@ -72,7 +72,7 @@ public class MovieDAO extends AbstractDAO<Movie> {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.MOVIE" +
                         " SET NAME = ?, DESCRIPTION = ?, YEAR = ?, DURATION = ?" +
-                        "WHERE ID = ?")) {
+                        " WHERE ID = ?")) {
             st.setString(1, movie.getName());
             st.setString(2, movie.getDescription());
             st.setInt(3, movie.getYear());
@@ -84,6 +84,7 @@ public class MovieDAO extends AbstractDAO<Movie> {
         } catch (SQLException exc) {
             logger.error(exc.getMessage(), exc);
             conn.rollback();
+            exc.printStackTrace();
         } finally {
             conn.setAutoCommit(true);
         }

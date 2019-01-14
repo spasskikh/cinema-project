@@ -59,7 +59,7 @@ public class UserRoleDAO extends AbstractDAO<UserRole> {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.USER_ROLE" +
                         " SET ROLE_NAME = ?" +
-                        "WHERE ID = ?")) {
+                        " WHERE ID = ?")) {
             st.setString(1, userRole.getRoleName());
             st.setInt(2, userRole.getId());
 
@@ -75,12 +75,13 @@ public class UserRoleDAO extends AbstractDAO<UserRole> {
     @Override
     public void delete(UserRole userRole) {
         try (PreparedStatement st = conn.prepareStatement(
-                "DELETE FROM cinema.USER WHERE ID = ?")) {
+                "DELETE FROM cinema.USER_ROLE WHERE ID = ?")) {
             st.setInt(1, userRole.getId());
 
             st.execute();
         } catch (SQLException exc) {
             logger.error(exc.getMessage(), exc);
+            exc.printStackTrace();
         }
     }
 
