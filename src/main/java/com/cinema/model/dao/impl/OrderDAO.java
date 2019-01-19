@@ -4,12 +4,7 @@ import com.cinema.model.dao.AbstractDAO;
 import com.cinema.model.entity.Order;
 import com.cinema.util.builder.OrderBuilder;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +17,13 @@ import java.util.List;
 public class OrderDAO extends AbstractDAO<Order> {
 
     /**
-     * date and time formatter field
-     */
-    private DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public void create(Order order) {
         try (PreparedStatement st = conn.prepareStatement(
                 "INSERT INTO cinema.ORDER (DATE, USER_ID, SHOWTIME_ID, SEAT_ID) VALUES (?, ?, ?, ?)")) {
-            st.setString(1, order.getDate().format(formatter));
+            st.setDate(1, Date.valueOf(order.getDate()));
             st.setInt(2, order.getUser().getId());
             st.setInt(3, order.getShowTime().getId());
             st.setInt(4, order.getSeat().getId());
@@ -71,7 +61,7 @@ public class OrderDAO extends AbstractDAO<Order> {
                 "UPDATE cinema.ORDER" +
                         " SET DATE = ?, USER_ID = ?, SHOWTIME_ID = ?, SEAT_ID = ?" +
                         " WHERE ID = ?")) {
-            st.setString(1, order.getDate().format(formatter));
+            st.setDate(1, Date.valueOf(order.getDate()));
             st.setInt(2, order.getUser().getId());
             st.setInt(3, order.getShowTime().getId());
             st.setInt(4, order.getSeat().getId());
@@ -127,7 +117,7 @@ public class OrderDAO extends AbstractDAO<Order> {
         OrderBuilder builder = new OrderBuilder();
         return builder
                 .buildId(resultSet.getInt("ID"))
-                .buildDate(LocalDate.parse(resultSet.getString("DATE"), formatter))
+                .buildDate(resultSet.getDate("DATE").toLocalDate())
                 .buildUser(resultSet.getInt("USER_ID"))
                 .buildShowTime(resultSet.getInt("SHOWTIME_ID"))
                 .buildSeat(resultSet.getInt("SEAT_ID"))

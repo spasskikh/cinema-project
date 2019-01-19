@@ -3,12 +3,7 @@ package com.cinema.model.dao.impl;
 import com.cinema.model.dao.AbstractDAO;
 import com.cinema.model.entity.TimeSlot;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,20 +15,14 @@ import java.util.List;
 public class TimeSlotDAO extends AbstractDAO<TimeSlot> {
 
     /**
-     * date and time formatter field
-     */
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public void create(TimeSlot timeSlot) {
         try (PreparedStatement st = conn.prepareStatement(
-                "INSERT INTO cinema.TIME_SLOT (TIME_FROM, TIME_TILL, DURATION) VALUES (?, ?, ?)")) {
-            st.setString(1, timeSlot.getFrom().format(formatter));
-            st.setString(2, timeSlot.getTill().format(formatter));
-            st.setInt(3, timeSlot.getDuration());
+                "INSERT INTO cinema.TIME_SLOT (TIME_FROM, TIME_TILL) VALUES (?, ?)")) {
+            st.setTime(1, Time.valueOf(timeSlot.getFrom()));
+            st.setTime(2, Time.valueOf(timeSlot.getTill()));
 
             st.execute();
         } catch (SQLException exc) {
@@ -66,12 +55,11 @@ public class TimeSlotDAO extends AbstractDAO<TimeSlot> {
     public void update(TimeSlot timeSlot) {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.TIME_SLOT" +
-                        " SET TIME_FROM = ?, TIME_TILL = ?, DURATION = ?" +
+                        " SET TIME_FROM = ?, TIME_TILL = ?" +
                         " WHERE ID = ?")) {
-            st.setString(1, timeSlot.getFrom().format(formatter));
-            st.setString(2, timeSlot.getTill().format(formatter));
-            st.setInt(3, timeSlot.getDuration());
-            st.setInt(4, timeSlot.getId());
+            st.setTime(1, Time.valueOf(timeSlot.getFrom()));
+            st.setTime(2, Time.valueOf(timeSlot.getTill()));
+            st.setInt(3, timeSlot.getId());
 
             st.execute();
         } catch (SQLException exc) {
@@ -122,8 +110,7 @@ public class TimeSlotDAO extends AbstractDAO<TimeSlot> {
     private TimeSlot createTimeSlot(ResultSet resultSet) throws SQLException {
         return new TimeSlot(
                 resultSet.getInt("ID"),
-                LocalTime.parse(resultSet.getString("TIME_FROM"), formatter),
-                LocalTime.parse(resultSet.getString("TIME_TILL"), formatter),
-                resultSet.getInt("DURATION"));
+                resultSet.getTime("TIME_FROM").toLocalTime(),
+                resultSet.getTime("TIME_TILL").toLocalTime());
     }
 }

@@ -4,12 +4,7 @@ import com.cinema.model.dao.AbstractDAO;
 import com.cinema.model.entity.ShowTime;
 import com.cinema.util.builder.ShowTimeBuilder;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,18 +16,13 @@ import java.util.List;
 public class ShowTimeDAO extends AbstractDAO<ShowTime> {
 
     /**
-     * date and time formatter field
-     */
-    private DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public void create(ShowTime showTime) {
         try (PreparedStatement st = conn.prepareStatement(
                 "INSERT INTO cinema.SHOWTIME (DATE, MOVIE_ID, TIME_SLOT_ID) VALUES (?, ?, ?)")) {
-            st.setString(1, showTime.getDate().format(formatter));
+            st.setDate(1, Date.valueOf(showTime.getDate()));
             st.setInt(2, showTime.getMovie().getId());
             st.setInt(3, showTime.getTimeSlot().getId());
 
@@ -69,7 +59,7 @@ public class ShowTimeDAO extends AbstractDAO<ShowTime> {
                 "UPDATE cinema.SHOWTIME" +
                         " SET DATE = ?, MOVIE_ID = ?, TIME_SLOT_ID = ?" +
                         " WHERE ID = ?")) {
-            st.setString(1, showTime.getDate().format(formatter));
+            st.setDate(1, Date.valueOf(showTime.getDate()));
             st.setInt(2, showTime.getMovie().getId());
             st.setInt(3, showTime.getTimeSlot().getId());
             st.setInt(4, showTime.getId());
@@ -124,7 +114,7 @@ public class ShowTimeDAO extends AbstractDAO<ShowTime> {
         ShowTimeBuilder builder = new ShowTimeBuilder();
         return builder
                 .buildId(resultSet.getInt("ID"))
-                .buildDate(resultSet.getString("DATE"))
+                .buildDate(resultSet.getDate("DATE").toLocalDate())
                 .buildMovie(resultSet.getInt("MOVIE_ID"))
                 .buildTimeSlot(resultSet.getInt("TIME_SLOT_ID"))
                 .build();

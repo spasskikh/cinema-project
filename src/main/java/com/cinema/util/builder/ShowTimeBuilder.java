@@ -9,7 +9,6 @@ import static com.cinema.util.constants.DAOKey.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * ShowTime builder class
@@ -53,8 +52,8 @@ public class ShowTimeBuilder {
      *
      * @return builder instance
      */
-    public ShowTimeBuilder buildDate(String date) {
-        showTime.setDate(LocalDate.parse(date, DateTimeFormatter.ISO_DATE));
+    public ShowTimeBuilder buildDate(LocalDate date) {
+        showTime.setDate(date);
         return this;
     }
 
