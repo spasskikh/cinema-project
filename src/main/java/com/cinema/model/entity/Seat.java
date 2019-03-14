@@ -1,34 +1,28 @@
 package com.cinema.model.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * Class describing user entity
+ * Class describing seat entity
  *
  * @author Anton Spasskikh
  */
+@Entity
+@Table(name = "seat")
 public class Seat {
 
-    /**
-     * seat id field
-     */
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    /**
-     * seat number field
-     */
+    @Column(name = "NUMBER")
     private Integer number;
 
-    /**
-     * constructor without parameters
-     */
     public Seat() {
     }
 
-    /**
-     * constructor with parameters, sets all fields
-     */
-    public Seat(Integer id, Integer number) {
+    public Seat(Long id, Integer number) {
         this.id = id;
         this.number = number;
     }
@@ -36,7 +30,7 @@ public class Seat {
     /**
      * @return {@link #id}
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -45,7 +39,7 @@ public class Seat {
      *
      * @param id {@link #id}
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

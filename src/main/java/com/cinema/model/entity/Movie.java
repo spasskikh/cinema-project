@@ -1,5 +1,6 @@
 package com.cinema.model.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -7,43 +8,30 @@ import java.util.Objects;
  *
  * @author Anton Spasskikh
  */
+@Entity
+@Table(name = "movie")
 public class Movie {
 
-    /**
-     * movie id field
-     */
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    /**
-     * movie name field
-     */
+    @Column(name = "NAME")
     private String name;
 
-    /**
-     * movie description field
-     */
+    @Column (name = "DESCRIPTION")
     private String description;
 
-    /**
-     * movie year field
-     */
+    @Column(name = "YEAR")
     private Integer year;
 
-    /**
-     * movie duration field
-     */
+    @Column(name = "DURATION")
     private Integer duration;
 
-    /**
-     * constructor without parameters
-     */
     public Movie() {
     }
 
-    /**
-     * constructor with parameters, sets all fields
-     */
-    public Movie(Integer id, String name, String description, Integer year, Integer duration) {
+    public Movie(Long id, String name, String description, Integer year, Integer duration) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -54,7 +42,7 @@ public class Movie {
     /**
      * @return {@link #id}
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -63,7 +51,7 @@ public class Movie {
      *
      * @param id {@link #id}
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -153,7 +141,7 @@ public class Movie {
     public int hashCode() {
         int prime = 31;
         int result;
-        result = prime + id;
+        result = prime + id.intValue();
         result = prime * result + name.hashCode();
         result = prime * result + description.hashCode();
         result = prime * result + year;

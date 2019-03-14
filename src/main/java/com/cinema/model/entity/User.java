@@ -1,5 +1,6 @@
 package com.cinema.model.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -7,38 +8,28 @@ import java.util.Objects;
  *
  * @author Anton Spasskikh
  */
+@Entity
+@Table(name = "user")
 public class User {
 
-    /**
-     * user id field
-     */
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    /**
-     * user login field
-     */
+    @Column(name = "LOGIN")
     private String login;
 
-    /**
-     * user password field
-     */
+    @Column(name = "PASSWORD")
     private String password;
 
-    /**
-     * user role field
-     */
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "USER_ROLE_ID")
     private UserRole role;
 
-    /**
-     * constructor without parameters
-     */
     public User() {
     }
 
-    /**
-     * constructor with parameters, sets all fields
-     */
-    public User(Integer id, String login, String password, UserRole role) {
+    public User(Long id, String login, String password, UserRole role) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -48,7 +39,7 @@ public class User {
     /**
      * @return {@link #id}
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -57,7 +48,7 @@ public class User {
      *
      * @param id {@link #id}
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

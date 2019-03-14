@@ -1,5 +1,6 @@
 package com.cinema.model.entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -8,54 +9,44 @@ import java.util.Objects;
  *
  * @author Anton Spasskikh
  */
+@Entity
+@Table(name = "order")
 public class Order {
 
-    /**
-     * order id field
-     */
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    /**
-     * order date field
-     */
+    @Column(name = "DATE")
     private LocalDate date;
 
-    /**
-     * order user field
-     */
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    /**
-     * order showtime field
-     */
-    private ShowTime showTime;
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "showtime_id")
+    private ShowTime showtime;
 
-    /**
-     * order seat field
-     */
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "seat_id")
     private Seat seat;
 
-    /**
-     * constructor without parameters
-     */
     public Order() {
     }
 
-    /**
-     * constructor with parameters, sets all fields
-     */
-    public Order(Integer id, LocalDate date, User user, ShowTime showTime, Seat seat) {
+    public Order(Long id, LocalDate date, User user, ShowTime showtime, Seat seat) {
         this.id = id;
         this.date = date;
         this.user = user;
-        this.showTime = showTime;
+        this.showtime = showtime;
         this.seat = seat;
     }
 
     /**
      * @return {@link #id}
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -64,7 +55,7 @@ public class Order {
      *
      * @param id {@link #id}
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -101,19 +92,19 @@ public class Order {
     }
 
     /**
-     * @return {@link #showTime}
+     * @return {@link #showtime}
      */
-    public ShowTime getShowTime() {
-        return showTime;
+    public ShowTime getShowtime() {
+        return showtime;
     }
 
     /**
      * sets order showtime
      *
-     * @param showTime {@link #showTime}
+     * @param showtime {@link #showtime}
      */
-    public void setShowTime(ShowTime showTime) {
-        this.showTime = showTime;
+    public void setShowtime(ShowTime showtime) {
+        this.showtime = showtime;
     }
 
     /**
@@ -143,7 +134,7 @@ public class Order {
         return Objects.equals(id, order.id) &&
                 Objects.equals(date, order.date) &&
                 Objects.equals(user, order.user) &&
-                Objects.equals(showTime, order.showTime) &&
+                Objects.equals(showtime, order.showtime) &&
                 Objects.equals(seat, order.seat);
     }
 
@@ -152,6 +143,6 @@ public class Order {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, user, showTime, seat);
+        return Objects.hash(id, date, user, showtime, seat);
     }
 }

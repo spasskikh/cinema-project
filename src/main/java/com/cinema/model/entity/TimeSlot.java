@@ -1,40 +1,32 @@
 package com.cinema.model.entity;
 
+import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.Objects;
 
 /**
- * Class describing user entity
+ * Class describing time slot entity
  *
  * @author Anton Spasskikh
  */
+@Entity
+@Table(name = "time_slot")
 public class TimeSlot {
 
-    /**
-     * time slot id field
-     */
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    /**
-     * time slot beginning time field
-     */
+    @Column(name = "FROM")
     private LocalTime from;
 
-    /**
-     * time slot ending time field
-     */
+    @Column(name = "TILL")
     private LocalTime till;
 
-    /**
-     * constructor without parameters
-     */
     public TimeSlot() {
     }
 
-    /**
-     * constructor with parameters, sets all fields
-     */
-    public TimeSlot(Integer id, LocalTime from, LocalTime till) {
+    public TimeSlot(Long id, LocalTime from, LocalTime till) {
         this.id = id;
         this.from = from;
         this.till = till;
@@ -43,7 +35,7 @@ public class TimeSlot {
     /**
      * @return {@link #id}
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -52,7 +44,7 @@ public class TimeSlot {
      *
      * @param id {@link #id}
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

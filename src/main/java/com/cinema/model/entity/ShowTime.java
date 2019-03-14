@@ -1,30 +1,38 @@
 package com.cinema.model.entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Class describing user entity
+ * Class describing showtime entity
  *
  * @author Anton Spasskikh
  */
+@Entity
+@Table(name = "showtime")
 public class ShowTime {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "DATE")
     private LocalDate date;
+
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "MOVIE_ID")
     private Movie movie;
+
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "TIME_SLOT_ID")
     private TimeSlot timeSlot;
 
-    /**
-     * constructor without parameters
-     */
+
     public ShowTime() {
     }
 
-    /**
-     * constructor with parameters, sets all fields
-     */
-    public ShowTime(Integer id, LocalDate date, Movie movie, TimeSlot timeSlot) {
+    public ShowTime(Long id, LocalDate date, Movie movie, TimeSlot timeSlot) {
         this.id = id;
         this.date = date;
         this.movie = movie;
@@ -34,7 +42,7 @@ public class ShowTime {
     /**
      * @return {@link #id}
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -43,7 +51,7 @@ public class ShowTime {
      *
      * @param id {@link #id}
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

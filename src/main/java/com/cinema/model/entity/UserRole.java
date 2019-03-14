@@ -1,5 +1,6 @@
 package com.cinema.model.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -7,28 +8,21 @@ import java.util.Objects;
  *
  * @author Anton Spasskikh
  */
+@Entity
+@Table(name = "user_role")
 public class UserRole {
 
-    /**
-     * user role id field
-     */
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    /**
-     * user role name field
-     */
+    @Column(name = "ROLE_NAME")
     private String roleName;
 
-    /**
-     * constructor without parameters
-     */
     public UserRole() {
     }
 
-    /**
-     * constructor with parameters, sets all fields
-     */
-    public UserRole(Integer id, String roleName) {
+    public UserRole(Long id, String roleName) {
         this.id = id;
         this.roleName = roleName;
     }
@@ -36,7 +30,7 @@ public class UserRole {
     /**
      * @return {@link #id}
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -45,7 +39,7 @@ public class UserRole {
      *
      * @param id {@link #id}
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
