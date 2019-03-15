@@ -62,7 +62,7 @@ public class ShowTimeBuilder {
      *
      * @return builder instance
      */
-    public ShowTimeBuilder buildMovie(Integer movieId) throws SQLException {
+    public ShowTimeBuilder buildMovie(Integer movieId) {
         MovieDAO movieDAO = (MovieDAO) DAOFactory.getDAO(MOVIE_DAO);
         showTime.setMovie(movieDAO.read(movieId));
         return this;

@@ -37,7 +37,7 @@ public abstract class AbstractDAO<T> {
      *
      * @param entity creating entity
      */
-    public abstract void create(T entity) throws SQLException;
+    public abstract void create(T entity);
 
     /**
      * gets entity from database
@@ -45,27 +45,27 @@ public abstract class AbstractDAO<T> {
      * @param id id of entity
      * @return found entity
      */
-    public abstract T read(Integer id) throws SQLException;
+    public abstract T read(Integer id);
 
     /**
      * updates entity in database
      *
      * @param entity entity for update
      */
-    public abstract void update(T entity) throws SQLException;
+    public abstract void update(T entity);
 
     /**
      * deletes entity from database
      *
      * @param entity entity to delete
      */
-    public abstract void delete(T entity) throws SQLException;
+    public abstract void delete(T entity);
 
     /**
      * gets all entities from database
      *
      * @return List of all entities
      */
-    public abstract List<T> getAll() throws SQLException;
+    public abstract List<T> getAll();
 
 }

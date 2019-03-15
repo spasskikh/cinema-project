@@ -21,8 +21,8 @@ public class MovieDAO extends AbstractDAO<Movie> {
      * {@inheritDoc}
      */
     @Override
-    public void create(Movie movie) throws SQLException {
-        conn.setAutoCommit(false);
+    public void create(Movie movie) {
+        setAutoCommit(false);
         try (PreparedStatement st = conn.prepareStatement(
                 "INSERT INTO cinema.MOVIE (NAME, DESCRIPTION, YEAR, DURATION) VALUES (?, ?, ?, ?)")) {
             st.setString(1, movie.getName());
@@ -34,9 +34,9 @@ public class MovieDAO extends AbstractDAO<Movie> {
             conn.commit();
         } catch (SQLException exc) {
             logger.error(exc.getMessage(), exc);
-            conn.rollback();
+            rollback();
         } finally {
-            conn.setAutoCommit(true);
+            setAutoCommit(true);
         }
     }
 
@@ -44,8 +44,8 @@ public class MovieDAO extends AbstractDAO<Movie> {
      * {@inheritDoc}
      */
     @Override
-    public Movie read(Integer id) throws SQLException {
-        conn.setAutoCommit(false);
+    public Movie read(Integer id) {
+        setAutoCommit(false);
         try (PreparedStatement st = conn.prepareStatement(
                 "SELECT * FROM cinema.MOVIE WHERE ID = ?")) {
             st.setInt(1, id);
@@ -56,9 +56,9 @@ public class MovieDAO extends AbstractDAO<Movie> {
             conn.commit();
         } catch (SQLException exc) {
             logger.error(exc.getMessage(), exc);
-            conn.rollback();
+            rollback();
         } finally {
-            conn.setAutoCommit(true);
+            setAutoCommit(true);
         }
         return null;
     }
@@ -67,8 +67,8 @@ public class MovieDAO extends AbstractDAO<Movie> {
      * {@inheritDoc}
      */
     @Override
-    public void update(Movie movie) throws SQLException {
-        conn.setAutoCommit(false);
+    public void update(Movie movie) {
+        setAutoCommit(false);
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE cinema.MOVIE" +
                         " SET NAME = ?, DESCRIPTION = ?, YEAR = ?, DURATION = ?" +
@@ -83,10 +83,9 @@ public class MovieDAO extends AbstractDAO<Movie> {
             conn.commit();
         } catch (SQLException exc) {
             logger.error(exc.getMessage(), exc);
-            conn.rollback();
-            exc.printStackTrace();
+            rollback();
         } finally {
-            conn.setAutoCommit(true);
+            setAutoCommit(true);
         }
     }
 
@@ -94,8 +93,8 @@ public class MovieDAO extends AbstractDAO<Movie> {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Movie movie) throws SQLException {
-        conn.setAutoCommit(false);
+    public void delete(Movie movie) {
+        setAutoCommit(false);
         try (PreparedStatement st = conn.prepareStatement(
                 "DELETE FROM cinema.MOVIE WHERE ID = ?")) {
             st.setInt(1, movie.getId());
@@ -104,9 +103,9 @@ public class MovieDAO extends AbstractDAO<Movie> {
             conn.commit();
         } catch (SQLException exc) {
             logger.error(exc.getMessage(), exc);
-            conn.rollback();
+            rollback();
         } finally {
-            conn.setAutoCommit(true);
+            setAutoCommit(true);
         }
     }
 
@@ -114,10 +113,10 @@ public class MovieDAO extends AbstractDAO<Movie> {
      * {@inheritDoc}
      */
     @Override
-    public List<Movie> getAll() throws SQLException {
+    public List<Movie> getAll() {
         List<Movie> list = new ArrayList<>();
 
-        conn.setAutoCommit(false);
+        setAutoCommit(false);
         try (Statement st = conn.createStatement()) {
             ResultSet resultSet = st.executeQuery("SELECT * FROM cinema.MOVIE");
 
@@ -127,9 +126,9 @@ public class MovieDAO extends AbstractDAO<Movie> {
             conn.commit();
         } catch (SQLException exc) {
             logger.error(exc.getMessage(), exc);
-            conn.rollback();
+            rollback();
         } finally {
-            conn.setAutoCommit(true);
+            setAutoCommit(true);
         }
         return list;
     }
@@ -146,5 +145,21 @@ public class MovieDAO extends AbstractDAO<Movie> {
                 resultSet.getString("DESCRIPTION"),
                 resultSet.getInt("YEAR"),
                 resultSet.getInt("DURATION"));
+    }
+
+    private void setAutoCommit(boolean b) {
+        try {
+            conn.setAutoCommit(b);
+        } catch (SQLException exc) {
+            logger.error("Exception while changing autocommit status", exc);
+        }
+    }
+
+    private void rollback() {
+        try {
+            conn.rollback();
+        } catch (SQLException exc) {
+            logger.error("Exception while rollback connection", exc);
+        }
     }
 }
