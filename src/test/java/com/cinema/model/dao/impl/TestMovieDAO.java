@@ -27,87 +27,72 @@ class TestMovieDAO {
     }
 
     @Test()
-    void test_create() throws SQLException {
+    void test_create() {
         boolean exists = false;
-        try {
-            dao.create(testMovie);
-            for (Movie movie : dao.getAll()) {
-                if (movie.getName().equals(testMovie.getName())) {
-                    exists = true;
-                    testMovie = movie;
-                    break;
-                }
+        dao.create(testMovie);
+        for (Movie movie : dao.getAll()) {
+            if (movie.getName().equals(testMovie.getName())) {
+                exists = true;
+                testMovie = movie;
+                break;
             }
-            Assertions.assertTrue(exists);
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        } finally {
-            dao.delete(testMovie);
         }
+        Assertions.assertTrue(exists);
+
+        dao.delete(testMovie);
     }
 
     @Test
-    void test_read() throws SQLException {
-        try {
-            dao.create(testMovie);
-            for (Movie movie : dao.getAll()) {
-                if (movie.getName().equals(testMovie.getName())) {
-                    System.out.println(movie.getId());
-                    testMovie = movie;
-                    break;
-                }
+    void test_read() {
+        dao.create(testMovie);
+        for (Movie movie : dao.getAll()) {
+            if (movie.getName().equals(testMovie.getName())) {
+                System.out.println(movie.getId());
+                testMovie = movie;
+                break;
             }
-            System.out.println(testMovie.getId());
-            Movie movie = dao.read(testMovie.getId());
-            Assertions.assertEquals(testMovie, movie);
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        } finally {
-            dao.delete(testMovie);
         }
+        System.out.println(testMovie.getId());
+        Movie movie = dao.read(testMovie.getId());
+        Assertions.assertEquals(testMovie, movie);
+
+        dao.delete(testMovie);
     }
 
     @Test
-    void test_update() throws SQLException {
-        try {
-            dao.create(testMovie);
-            for (Movie movie : dao.getAll()) {
-                if (movie.getName().equals(testMovie.getName())) {
-                    testMovie = movie;
-                    break;
-                }
+    void test_update() {
+        dao.create(testMovie);
+        for (Movie movie : dao.getAll()) {
+            if (movie.getName().equals(testMovie.getName())) {
+                testMovie = movie;
+                break;
             }
-            testMovie.setDescription("NEW_DESCRIPTION");
-            dao.update(testMovie);
-            Assertions.assertEquals(testMovie, dao.read(testMovie.getId()));
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        } finally {
-            dao.delete(testMovie);
         }
+        testMovie.setDescription("NEW_DESCRIPTION");
+        dao.update(testMovie);
+        Assertions.assertEquals(testMovie, dao.read(testMovie.getId()));
+
+        dao.delete(testMovie);
     }
 
     @Test
-    void test_delete() throws SQLException {
-        try {
-            dao.create(testMovie);
-            for (Movie movie : dao.getAll()) {
-                if (movie.getName().equals(testMovie.getName())) {
-                    testMovie = movie;
-                    break;
-                }
+    void test_delete() {
+
+        dao.create(testMovie);
+        for (Movie movie : dao.getAll()) {
+            if (movie.getName().equals(testMovie.getName())) {
+                testMovie = movie;
+                break;
             }
-            dao.delete(testMovie);
-            Assertions.assertNull(dao.read(testMovie.getId()));
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        } finally {
-            dao.delete(testMovie);
         }
+        dao.delete(testMovie);
+        Assertions.assertNull(dao.read(testMovie.getId()));
+
+        dao.delete(testMovie);
     }
 
     @Test
-    void test_getAll() throws SQLException {
+    void test_getAll() {
         List<Movie> movies = dao.getAll();
         Assertions.assertFalse(movies.size() <= 1);
     }
