@@ -1,4 +1,4 @@
-package com.cinema.model.dao.impl;
+package com.cinema.model.dao;
 
 import java.util.List;
 
