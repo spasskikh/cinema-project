@@ -26,7 +26,7 @@ public class Order {
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "showtime_id")
-    private ShowTime showtime;
+    private Showtime showtime;
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "seat_id")
@@ -35,7 +35,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, LocalDate date, User user, ShowTime showtime, Seat seat) {
+    public Order(Long id, LocalDate date, User user, Showtime showtime, Seat seat) {
         this.id = id;
         this.date = date;
         this.user = user;
@@ -94,7 +94,7 @@ public class Order {
     /**
      * @return {@link #showtime}
      */
-    public ShowTime getShowtime() {
+    public Showtime getShowtime() {
         return showtime;
     }
 
@@ -103,7 +103,7 @@ public class Order {
      *
      * @param showtime {@link #showtime}
      */
-    public void setShowtime(ShowTime showtime) {
+    public void setShowtime(Showtime showtime) {
         this.showtime = showtime;
     }
 

@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "showtime")
-public class ShowTime {
+public class Showtime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,10 +29,10 @@ public class ShowTime {
     private TimeSlot timeSlot;
 
 
-    public ShowTime() {
+    public Showtime() {
     }
 
-    public ShowTime(Long id, LocalDate date, Movie movie, TimeSlot timeSlot) {
+    public Showtime(Long id, LocalDate date, Movie movie, TimeSlot timeSlot) {
         this.id = id;
         this.date = date;
         this.movie = movie;
@@ -110,7 +110,7 @@ public class ShowTime {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ShowTime showTime = (ShowTime) o;
+        Showtime showTime = (Showtime) o;
         return Objects.equals(id, showTime.id) &&
                 Objects.equals(date, showTime.date) &&
                 Objects.equals(movie, showTime.movie) &&
