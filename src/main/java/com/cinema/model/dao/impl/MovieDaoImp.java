@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class MovieDaoImp implements MovieDao {
@@ -97,6 +98,8 @@ public class MovieDaoImp implements MovieDao {
     public List<Movie> getAll() {
         Session session = factory.openSession();
         CriteriaQuery<Movie> query = session.getCriteriaBuilder().createQuery(Movie.class);
+        Root<Movie> movies = query.from(Movie.class);
+        query.select(movies);
         return session.createQuery(query).getResultList();
     }
 }

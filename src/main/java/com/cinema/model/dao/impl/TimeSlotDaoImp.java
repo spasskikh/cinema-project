@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class TimeSlotDaoImp implements TimeSlotDao {
@@ -97,6 +98,8 @@ public class TimeSlotDaoImp implements TimeSlotDao {
     public List<TimeSlot> getAll() {
         Session session = factory.openSession();
         CriteriaQuery<TimeSlot> query = session.getCriteriaBuilder().createQuery(TimeSlot.class);
+        Root<TimeSlot> timeSlots = query.from(TimeSlot.class);
+        query.select(timeSlots);
         return session.createQuery(query).getResultList();
     }
 }

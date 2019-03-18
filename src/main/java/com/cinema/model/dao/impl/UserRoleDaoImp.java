@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class UserRoleDaoImp implements UserRoleDao {
@@ -97,6 +98,8 @@ public class UserRoleDaoImp implements UserRoleDao {
     public List<UserRole> getAll() {
         Session session = factory.openSession();
         CriteriaQuery<UserRole> query = session.getCriteriaBuilder().createQuery(UserRole.class);
+        Root<UserRole> userRoles = query.from(UserRole.class);
+        query.select(userRoles);
         return session.createQuery(query).getResultList();
     }
 }

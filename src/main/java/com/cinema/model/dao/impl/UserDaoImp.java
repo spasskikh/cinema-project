@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class UserDaoImp implements UserDao {
@@ -97,6 +98,8 @@ public class UserDaoImp implements UserDao {
     public List<User> getAll() {
         Session session = factory.openSession();
         CriteriaQuery<User> query = session.getCriteriaBuilder().createQuery(User.class);
+        Root<User> users = query.from(User.class);
+        query.select(users);
         return session.createQuery(query).getResultList();
     }
 }

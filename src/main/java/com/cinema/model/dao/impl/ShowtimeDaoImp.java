@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class ShowtimeDaoImp implements ShowtimeDao {
@@ -97,6 +98,8 @@ public class ShowtimeDaoImp implements ShowtimeDao {
     public List<Showtime> getAll() {
         Session session = factory.openSession();
         CriteriaQuery<Showtime> query = session.getCriteriaBuilder().createQuery(Showtime.class);
+        Root<Showtime> showtimes = query.from(Showtime.class);
+        query.select(showtimes);
         return session.createQuery(query).getResultList();
     }
 
