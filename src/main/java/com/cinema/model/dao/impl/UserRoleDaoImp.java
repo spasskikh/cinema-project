@@ -1,8 +1,8 @@
 package com.cinema.model.dao.impl;
 
-import com.cinema.model.dao.MovieDao;
+import com.cinema.model.dao.UserRoleDao;
 import com.cinema.model.dao.connection.HibernateUtil;
-import com.cinema.model.entity.Movie;
+import com.cinema.model.entity.UserRole;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,11 +10,11 @@ import org.hibernate.SessionFactory;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class MovieDaoImp implements MovieDao {
+public class UserRoleDaoImp implements UserRoleDao {
 
     private SessionFactory factory;
 
-    public MovieDaoImp() {
+    public UserRoleDaoImp() {
         factory = HibernateUtil.factory();
     }
 
@@ -22,7 +22,7 @@ public class MovieDaoImp implements MovieDao {
      * {@inheritDoc}
      */
     @Override
-    public Long create(Movie entity) {
+    public Long create(UserRole entity) {
         Session session = factory.openSession();
         try {
             session.beginTransaction();
@@ -31,7 +31,7 @@ public class MovieDaoImp implements MovieDao {
             return id;
         } catch (HibernateException exc) {
             session.getTransaction().rollback();
-            logger.error("Exception in Movie read method", exc);
+            logger.error("Exception in UserRole read method", exc);
             throw new RuntimeException(exc);
         } finally {
             session.close();
@@ -42,19 +42,19 @@ public class MovieDaoImp implements MovieDao {
      * {@inheritDoc}
      */
     @Override
-    public Movie read(Long id) {
+    public UserRole read(Long id) {
         Session session = factory.openSession();
         session.beginTransaction();
-        Movie movie = session.get(Movie.class, id);
+        UserRole userRole = session.get(UserRole.class, id);
         session.close();
-        return movie;
+        return userRole;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean update(Movie entity) {
+    public boolean update(UserRole entity) {
         Session session = factory.openSession();
         try {
             session.beginTransaction();
@@ -63,7 +63,7 @@ public class MovieDaoImp implements MovieDao {
             return true;
         } catch (HibernateException exc) {
             session.getTransaction().rollback();
-            logger.error("Exception in Movie update method", exc);
+            logger.error("Exception in UserRole update method", exc);
             throw new RuntimeException(exc);
         } finally {
             session.close();
@@ -74,7 +74,7 @@ public class MovieDaoImp implements MovieDao {
      * {@inheritDoc}
      */
     @Override
-    public boolean delete(Movie entity) {
+    public boolean delete(UserRole entity) {
         Session session = factory.openSession();
         try {
             session.beginTransaction();
@@ -83,7 +83,7 @@ public class MovieDaoImp implements MovieDao {
             return true;
         } catch (HibernateException exc) {
             session.getTransaction().rollback();
-            logger.error("Exception in Movie delete method", exc);
+            logger.error("Exception in UserRole delete method", exc);
             throw new RuntimeException(exc);
         } finally {
             session.close();
@@ -94,9 +94,9 @@ public class MovieDaoImp implements MovieDao {
      * {@inheritDoc}
      */
     @Override
-    public List<Movie> getAll() {
+    public List<UserRole> getAll() {
         Session session = factory.openSession();
-        CriteriaQuery<Movie> query = session.getCriteriaBuilder().createQuery(Movie.class);
+        CriteriaQuery<UserRole> query = session.getCriteriaBuilder().createQuery(UserRole.class);
         return session.createQuery(query).getResultList();
     }
 }
