@@ -1,16 +1,6 @@
 package com.cinema.model.dao;
 
-import java.util.List;
+import com.cinema.model.entity.Movie;
 
-public interface MovieDaoH<T> {
-
-    Long create(T entity);
-
-    T read(Long id);
-
-    boolean update(T entity);
-
-    boolean delete(T entity);
-
-    List<T> getAll();
+public interface MovieDaoH extends CrudDao<Movie> {
 }

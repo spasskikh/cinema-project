@@ -1,9 +1,8 @@
 package com.cinema.model.dao.impl;
 
+import com.cinema.model.dao.MovieDaoH;
 import com.cinema.model.dao.connection.HibernateUtil;
 import com.cinema.model.entity.Movie;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,9 +10,7 @@ import org.hibernate.SessionFactory;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class MovieDaoImp implements MovieDaoH<Movie> {
-
-    protected static Logger logger = LogManager.getLogger(MovieDaoImp.class);
+public class MovieDaoImp implements MovieDaoH {
 
     private SessionFactory factory;
 
@@ -21,6 +18,9 @@ public class MovieDaoImp implements MovieDaoH<Movie> {
         factory = HibernateUtil.factory();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Long create(Movie entity) {
         Session session = factory.openSession();
@@ -38,6 +38,9 @@ public class MovieDaoImp implements MovieDaoH<Movie> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Movie read(Long id) {
         Session session = factory.openSession();
@@ -47,6 +50,9 @@ public class MovieDaoImp implements MovieDaoH<Movie> {
         return movie;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(Movie entity) {
         Session session = factory.openSession();
@@ -57,13 +63,16 @@ public class MovieDaoImp implements MovieDaoH<Movie> {
             return true;
         } catch (HibernateException exc) {
             session.getTransaction().rollback();
-            logger.error("Exception in movie update method", exc);
+            logger.error("Exception in Movie update method", exc);
             throw new RuntimeException(exc);
         } finally {
             session.close();
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(Movie entity) {
         Session session = factory.openSession();
@@ -74,13 +83,16 @@ public class MovieDaoImp implements MovieDaoH<Movie> {
             return true;
         } catch (HibernateException exc) {
             session.getTransaction().rollback();
-            logger.error("Exception in movie delete method", exc);
+            logger.error("Exception in Movie delete method", exc);
             throw new RuntimeException(exc);
         } finally {
             session.close();
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Movie> getAll() {
         Session session = factory.openSession();
