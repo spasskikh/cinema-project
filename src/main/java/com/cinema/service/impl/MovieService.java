@@ -8,7 +8,6 @@ import com.cinema.util.constants.DAOKey;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -42,12 +41,7 @@ public class MovieService implements Service {
      * @return movie instance
      */
     public Movie getMovie(Integer id) {
-        try {
-            return movieDAO.read(id);
-        } catch (SQLException exc) {
-            logger.error(exc.getMessage(), exc);
-            return null;
-        }
+        return movieDAO.read(id);
     }
 
     /**
@@ -56,12 +50,7 @@ public class MovieService implements Service {
      * @return list of movies
      */
     public List<Movie> getAll() {
-        try {
-            return movieDAO.getAll();
-        } catch (SQLException exc) {
-            logger.error(exc);
-            return null;
-        }
+        return movieDAO.getAll();
     }
 
     /**
@@ -79,10 +68,6 @@ public class MovieService implements Service {
         movie.setYear(year);
         movie.setDuration(duration);
 
-        try {
-            movieDAO.create(movie);
-        } catch (SQLException exc) {
-            logger.error(exc.getMessage(), exc);
-        }
+        movieDAO.create(movie);
     }
 }
