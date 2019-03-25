@@ -1,4 +1,16 @@
-# Ignore files:
+# Ignore IDEA files:
 /.idea
 *.iml
+
+# Ignore out files:
+/out
+
+# Ignore Maven build output directory
 /target
+
+# Ignore Gradle files
+/.gradle
+/build
+/gradle
+gradlew
+gradlew.bat
