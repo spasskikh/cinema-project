@@ -1,6 +1,7 @@
 package com.cinema.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -10,22 +11,22 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "movie")
-public class Movie {
+public class Movie implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @Column (name = "DESCRIPTION")
+    @Column (name = "description")
     private String description;
 
-    @Column(name = "YEAR")
+    @Column(name = "year")
     private Integer year;
 
-    @Column(name = "DURATION")
+    @Column(name = "duration")
     private Integer duration;
 
     public Movie() {
@@ -147,5 +148,16 @@ public class Movie {
         result = prime * result + year;
         result = prime * result + duration;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", year=" + year +
+                ", duration=" + duration +
+                '}';
     }
 }

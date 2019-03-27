@@ -1,6 +1,7 @@
 package com.cinema.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -10,13 +11,13 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "user_role")
-public class UserRole {
+public class UserRole implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ROLE_NAME")
+    @Column(name = "role_name")
     private String roleName;
 
     public UserRole() {
@@ -77,5 +78,16 @@ public class UserRole {
     @Override
     public int hashCode() {
         return Objects.hash(id, roleName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "UserRole{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }

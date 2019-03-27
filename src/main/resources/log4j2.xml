@@ -3,46 +3,18 @@
 
     <Properties>
         <Property name="LOG_PATTERN">[%d{yyyy-MM-dd 'T'HH:mm:ss}] - %m%n</Property>
-        <Property name="LOG_ROOT">${sys:catalina.home}/logs/cinema</Property>
     </Properties>
 
     <Appenders>
-
         <Appender type="Console" name="Console">
             <Layout type="PatternLayout" pattern="${LOG_PATTERN}"/>
         </Appender>
-
-        <Appender type="File" name="File" fileName="${LOG_ROOT}/log.txt">
-            <Layout type="PatternLayout" pattern="${LOG_PATTERN}"/>
-        </Appender>
-
     </Appenders>
 
     <Loggers>
-
-        <Logger name="com.cinema.model.dao.connection.ConnDB" level="error" additivity="false">
-            <AppenderRef ref="File"/>
-        </Logger>
-
-        <Logger name="com.cinema.model.dao.AbstractDAO" level="info" additivity="false">
-            <AppenderRef ref="File"/>
-            <AppenderRef ref="Console"/>
-        </Logger>
-
-        <Logger name="com.cinema.controller.Controller" level="info" additivity="false">
-            <AppenderRef ref="File"/>
-            <AppenderRef ref="Console"/>
-        </Logger>
-
-        <Logger name="com.cinema.service.impl.MovieService" level="info" additivity="false">
-            <AppenderRef ref="File"/>
-            <AppenderRef ref="Console"/>
-        </Logger>
-
         <Root level="error">
             <AppenderRef ref="Console"/>
         </Root>
-
     </Loggers>
 
 </Configuration>

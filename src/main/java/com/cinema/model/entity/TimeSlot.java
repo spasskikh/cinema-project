@@ -1,6 +1,7 @@
 package com.cinema.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -11,25 +12,25 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "time_slot")
-public class TimeSlot {
+public class TimeSlot implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "FROM")
-    private LocalTime from;
+    @Column(name = "start_time")
+    private LocalTime startTime;
 
-    @Column(name = "TILL")
-    private LocalTime till;
+    @Column(name = "end_time")
+    private LocalTime endTime;
 
     public TimeSlot() {
     }
 
-    public TimeSlot(Long id, LocalTime from, LocalTime till) {
+    public TimeSlot(Long id, LocalTime startTime, LocalTime endTime) {
         this.id = id;
-        this.from = from;
-        this.till = till;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -49,35 +50,35 @@ public class TimeSlot {
     }
 
     /**
-     * @return {@link #from}
+     * @return {@link #startTime}
      */
-    public LocalTime getFrom() {
-        return from;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
     /**
      * sets time slot beginning time
      *
-     * @param from {@link #from}
+     * @param from {@link #startTime}
      */
-    public void setFrom(LocalTime from) {
-        this.from = from;
+    public void setStartTime(LocalTime from) {
+        this.startTime = from;
     }
 
     /**
-     * @return {@link #till}
+     * @return {@link #endTime}
      */
-    public LocalTime getTill() {
-        return till;
+    public LocalTime getEndTime() {
+        return endTime;
     }
 
     /**
      * sets time slot ending time
      *
-     * @param till {@link #till}
+     * @param endTime {@link #endTime}
      */
-    public void setTill(LocalTime till) {
-        this.till = till;
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     /**
@@ -89,8 +90,8 @@ public class TimeSlot {
         if (o == null || getClass() != o.getClass()) return false;
         TimeSlot timeSlot = (TimeSlot) o;
         return Objects.equals(id, timeSlot.id) &&
-                Objects.equals(from, timeSlot.from) &&
-                Objects.equals(till, timeSlot.till);
+                Objects.equals(startTime, timeSlot.startTime) &&
+                Objects.equals(endTime, timeSlot.endTime);
     }
 
     /**
@@ -98,6 +99,6 @@ public class TimeSlot {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id, from, till);
+        return Objects.hash(id, startTime, endTime);
     }
 }

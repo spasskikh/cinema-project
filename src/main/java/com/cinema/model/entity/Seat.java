@@ -1,6 +1,7 @@
 package com.cinema.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -10,13 +11,13 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "seat")
-public class Seat {
+public class Seat implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NUMBER")
+    @Column(name = "number")
     private Integer number;
 
     public Seat() {
