@@ -39,4 +39,9 @@ public class SeatServiceImpl implements SeatService {
     public List<Seat> getAll() {
         return seatDao.findAll();
     }
+
+    @Override
+    public List<Seat> getFreeSeats(List<Long> seatsId) {
+        return seatDao.getFreeSeats(seatsId);
+    }
 }

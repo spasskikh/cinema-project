@@ -1,6 +1,7 @@
 package com.cinema.service;
 
 import com.cinema.config.DataConfig;
+import com.cinema.config.TilesConfig;
 import com.cinema.config.WebApplicationContextConfig;
 import com.cinema.model.entity.Seat;
 import org.junit.jupiter.api.Assertions;
@@ -16,6 +17,8 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import java.util.Arrays;
+import java.util.List;
 
 @DirtiesContext
 @ExtendWith(SpringExtension.class)
@@ -73,5 +76,12 @@ class TestSeatService {
     void test_getAll() {
         /*20 - initial number of seats*/
         Assertions.assertEquals(20, seatService.getAll().size());
+    }
+
+    @Test
+    void test_getFreeSeats() {
+        List<Long> seatsId = Arrays.asList(1L,2L,3L);
+
+        Assertions.assertNotEquals(20,seatService.getFreeSeats(seatsId).size());
     }
 }
