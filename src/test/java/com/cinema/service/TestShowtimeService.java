@@ -1,6 +1,5 @@
 package com.cinema.service;
 
-import com.cinema.config.DataConfig;
 import com.cinema.config.WebApplicationContextConfig;
 import com.cinema.model.entity.Movie;
 import com.cinema.model.entity.Showtime;
@@ -23,7 +22,7 @@ import java.time.LocalTime;
 
 @DirtiesContext
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {DataConfig.class, WebApplicationContextConfig.class})
+@ContextConfiguration(classes = WebApplicationContextConfig.class)
 @WebAppConfiguration
 class TestShowtimeService {
 

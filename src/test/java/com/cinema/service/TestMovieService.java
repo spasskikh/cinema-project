@@ -1,6 +1,5 @@
 package com.cinema.service;
 
-import com.cinema.config.DataConfig;
 import com.cinema.config.WebApplicationContextConfig;
 import com.cinema.model.entity.Movie;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +18,7 @@ import javax.persistence.EntityNotFoundException;
 
 @DirtiesContext
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {DataConfig.class, WebApplicationContextConfig.class})
+@ContextConfiguration(classes = WebApplicationContextConfig.class)
 @WebAppConfiguration
 class TestMovieService {
 

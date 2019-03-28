@@ -1,6 +1,5 @@
 package com.cinema.service;
 
-import com.cinema.config.DataConfig;
 import com.cinema.config.WebApplicationContextConfig;
 import com.cinema.model.entity.*;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +20,7 @@ import java.time.LocalTime;
 
 @DirtiesContext
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {DataConfig.class, WebApplicationContextConfig.class})
+@ContextConfiguration(classes = WebApplicationContextConfig.class)
 @WebAppConfiguration
 class TestTicketService {
 
