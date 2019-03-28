@@ -16,12 +16,13 @@ dependencies {
             'org.hibernate:hibernate-entitymanager:5.4.0.Final',
             'org.apache.logging.log4j:log4j-api:2.11.1',
             'org.apache.logging.log4j:log4j-core:2.11.1',
-            'jstl:jstl:1.2',
-            'org.jasypt:jasypt:1.9.2',
             'org.springframework:spring-webmvc:5.1.5.RELEASE',
             'org.springframework:spring-jdbc:5.1.5.RELEASE',
             'org.springframework:spring-orm:5.1.5.RELEASE',
-            'org.springframework.data:spring-data-jpa:2.1.5.RELEASE'
+            'org.springframework.data:spring-data-jpa:2.1.5.RELEASE',
+            'org.jasypt:jasypt:1.9.2',
+            'jstl:jstl:1.2',
+            'org.apache.tiles:tiles-extras:3.0.8'
 
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
 
