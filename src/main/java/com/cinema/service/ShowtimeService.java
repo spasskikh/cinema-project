@@ -2,6 +2,7 @@ package com.cinema.service;
 
 import com.cinema.model.entity.Showtime;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ShowtimeService {
@@ -15,4 +16,9 @@ public interface ShowtimeService {
     void delete(long id);
 
     List<Showtime> getAll();
+
+    Showtime getByDateAndTimeSlot(LocalDate date, Long timeSlotId);
+
+    Showtime getByMovieAndAfterDate(Long movieId, LocalDate date);
+
 }

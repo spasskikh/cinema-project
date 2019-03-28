@@ -79,4 +79,20 @@ class TestShowtimeService {
     void test_getAll() {
         Assertions.assertEquals(0, showtimeService.getAll().size());
     }
+
+    @Test
+    void test_getByDateAndTimeSlot() {
+        Showtime createdShowtime = showtimeService.create(showtime);
+        Showtime foundShowtime = showtimeService.getByDateAndTimeSlot(createdShowtime.getDate(), createdShowtime.getTimeSlot().getId());
+
+        Assertions.assertEquals(createdShowtime, foundShowtime);
+    }
+
+    @Test
+    void test_getByMovieAndAfterDate() {
+        Showtime createdShowtime = showtimeService.create(showtime);
+        Showtime foundShowtime = showtimeService.getByMovieAndAfterDate(createdShowtime.getMovie().getId(), createdShowtime.getDate());
+
+        Assertions.assertEquals(createdShowtime, foundShowtime);
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -38,5 +39,15 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     @Override
     public List<Showtime> getAll() {
         return showtimeDao.findAll();
+    }
+
+    @Override
+    public Showtime getByDateAndTimeSlot(LocalDate date, Long timeSlotId) {
+        return showtimeDao.getByDateAndTimeSlot(date, timeSlotId);
+    }
+
+    @Override
+    public Showtime getByMovieAndAfterDate(Long movieId, LocalDate date) {
+        return showtimeDao.getByMovieAndAfterDate(movieId, date);
     }
 }
