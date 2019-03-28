@@ -24,7 +24,8 @@ dependencies {
             'jstl:jstl:1.2',
             'org.apache.tiles:tiles-extras:3.0.8'
 
-    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1',
+            'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
 
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0',
             'org.junit.jupiter:junit-jupiter-params:5.2.0',
