@@ -39,4 +39,16 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> getAll() {
         return ticketDao.findAll();
     }
+
+    @Override
+    public Ticket getByShowtime(Long showtimeId) {
+        return ticketDao.getByShowtime(showtimeId);
+    }
+
+    @Override
+    public Ticket getByShowtimeAndSeat(Long showtimeId, Long seatId) {
+        return ticketDao.getByShowtimeAndSeat(showtimeId, seatId);
+    }
+
+
 }

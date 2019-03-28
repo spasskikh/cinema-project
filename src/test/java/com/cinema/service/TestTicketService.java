@@ -85,4 +85,20 @@ class TestTicketService {
     void test_getAll() {
         Assertions.assertEquals(0, ticketService.getAll().size());
     }
+
+    @Test
+    void test_getByShowtime() {
+        Ticket createdTicket = ticketService.create(ticket);
+        Ticket foundTicket = ticketService.getByShowtime(createdTicket.getShowtime().getId());
+
+        Assertions.assertEquals(createdTicket, foundTicket);
+    }
+
+    @Test
+    void test_getByShowtimeAndSeat() {
+        Ticket createdTicket = ticketService.create(ticket);
+        Ticket foundTicket = ticketService.getByShowtimeAndSeat(createdTicket.getShowtime().getId(), createdTicket.getSeat().getId());
+
+        Assertions.assertEquals(createdTicket, foundTicket);
+    }
 }

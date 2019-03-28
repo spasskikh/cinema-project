@@ -15,4 +15,8 @@ public interface TicketService {
     void delete(long id);
 
     List<Ticket> getAll();
+
+    Ticket getByShowtime(Long showtimeId);
+
+    Ticket getByShowtimeAndSeat(Long showtimeId, Long seatId);
 }
