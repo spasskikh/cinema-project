@@ -1,5 +1,6 @@
 package com.cinema.service;
 
+import com.cinema.dto.UserDto;
 import com.cinema.model.entity.User;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface UserService {
     List<User> getAll();
 
     User findByLogin(String login);
+
+    void checkPassword(UserDto user, User foundUser);
 }

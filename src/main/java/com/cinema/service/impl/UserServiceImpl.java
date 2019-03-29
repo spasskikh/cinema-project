@@ -1,5 +1,6 @@
 package com.cinema.service.impl;
 
+import com.cinema.dto.UserDto;
 import com.cinema.model.dao.UserDao;
 import com.cinema.model.entity.User;
 import com.cinema.service.UserService;
@@ -47,6 +48,11 @@ public class UserServiceImpl implements UserService {
             throw new EntityNotFoundException();
         }
         return byLogin;
+    }
+
+    @Override
+    public void checkPassword(UserDto user, User foundUser) {
+
     }
 
 
