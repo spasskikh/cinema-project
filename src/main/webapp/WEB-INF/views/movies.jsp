@@ -1,16 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<link href="resources/css/equal-height-columns.css" rel="stylesheet">
 
-<section class="container" style="grid-auto-rows: 1fr">
-    <div class="row">
+<section class="container">
+    <div class="row row-eq-height">
         <c:forEach items="${movies}" var="movie">
-            <div class="col-sm-6 col-md-4" style="padding-bottom: 15px">
+            <div class="col-sm-6 col-md-4 col-xs-12" style="padding-bottom: 15px">
                 <div class="thumbnail">
-                        <img src="<c:url value="/img/${movie.id}.jpg"></c:url>" alt="image" style="width: 100%"/>
+                    <img src="<c:url value="/img/${movie.id}.jpg"></c:url>" alt="image" style="width: 100%"/>
                     <div class="caption">
-                        <%--<div class="row equal-height">--%>
-                            <h4>${movie.name}</h4>
-                        <%--</div>--%>
+                        <h4>${movie.name}</h4>
                         <p>Year: ${movie.year}</p>
                         <p>Duration: ${movie.duration}</p>
                         <p>
