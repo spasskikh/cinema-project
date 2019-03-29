@@ -6,6 +6,9 @@
 <head>
     <title><tiles:insertAttribute name="title"/></title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link href="resources/css/equal-height-columns.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
+    <script src="/cinema/resources/js/controllers.js"></script>
 </head>
 
 <body>

@@ -14,7 +14,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String welcome(Model model) {
-        model.addAttribute("movies", movieService.getAll());
-        return "movies";
+        return "home";
     }
 }

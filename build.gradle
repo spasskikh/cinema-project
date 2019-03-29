@@ -20,6 +20,10 @@ dependencies {
             'org.springframework:spring-jdbc:5.1.5.RELEASE',
             'org.springframework:spring-orm:5.1.5.RELEASE',
             'org.springframework.data:spring-data-jpa:2.1.5.RELEASE',
+            
+            'org.springframework:spring-oxm:5.1.5.RELEASE',
+            'org.codehaus.jackson:jackson-mapper-asl:1.9.13',
+            'com.fasterxml.jackson.core:jackson-databind:2.9.8',
             'org.jasypt:jasypt:1.9.2',
             'jstl:jstl:1.2',
             'org.apache.tiles:tiles-extras:3.0.8'

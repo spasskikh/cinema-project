@@ -1,6 +1,7 @@
 package com.cinema.model.entity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "movie")
+@XmlRootElement
 public class Movie implements Serializable {
 
     @Id
