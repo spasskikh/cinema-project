@@ -13,11 +13,11 @@
         <put-attribute name="content" value=""/>
     </definition>
 
-    <definition name="movies" extends="baseLayout">
+    <definition name="home" extends="baseLayout">
         <put-attribute name="title" value="Cinema"/>
         <put-attribute name="heading" value="Cinema"/>
         <put-attribute name="tagline" value="Welcome to the best cinema"/>
-        <put-attribute name="content" value="/WEB-INF/views/movies.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
     </definition>
 
 
