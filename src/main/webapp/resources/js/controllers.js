@@ -7,4 +7,11 @@ moviesApp.controller('moviesCtrl', function ($scope, $http) {
                 $scope.movies = data;
             });
     };
+
+    $scope.getMovie = function (movieId) {
+        $http.get('/cinema/rest/movies/'+movieId)
+            .success(function (data) {
+                $scope.movie = data;
+            });
+    };
 });

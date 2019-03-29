@@ -24,7 +24,6 @@ public class MovieRestController {
 
     @RequestMapping(value = "movies/{movieId}", method = RequestMethod.GET)
     public Movie read(@PathVariable(value = "movieId") Long movieId) {
-        System.out.println("in method");
         return movieService.read(movieId);
     }
 }
