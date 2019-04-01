@@ -19,15 +19,4 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody UserDto userDto, HttpServletRequest req) {
-        try {
-            User foundUser = userService.findByLogin(userDto.getLogin());
-            userService.checkPassword(userDto, foundUser);
-            req.getSession(true).setAttribute("user", foundUser);
-            return "redirect: /cinema";
-        } catch (EntityNotFoundException | IncorrectPasswordException exc) {
-            return "login";
-        }
-    }
 }

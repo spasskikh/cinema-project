@@ -23,7 +23,7 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne(cascade = CascadeType.MERGE, optional = false)
     @JoinColumn(name = "user_role_id")
     private UserRole role;
 

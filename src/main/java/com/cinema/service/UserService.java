@@ -1,11 +1,11 @@
 package com.cinema.service;
 
-import com.cinema.dto.UserDto;
 import com.cinema.model.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     User create(User user);
 
@@ -19,5 +19,4 @@ public interface UserService {
 
     User findByLogin(String login);
 
-    void checkPassword(UserDto user, User foundUser);
 }

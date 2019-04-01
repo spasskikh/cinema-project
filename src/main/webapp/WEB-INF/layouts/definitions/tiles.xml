@@ -30,14 +30,14 @@
     <definition name="login" extends="baseLayout">
         <put-attribute name="title" value="Cinema"/>
         <put-attribute name="heading" value="Cinema"/>
-        <put-attribute name="tagline" value="Please, enter your credentials"/>
+        <put-attribute name="tagline" value="Login form"/>
         <put-attribute name="content" value="/WEB-INF/views/login.jsp"/>
     </definition>
 
     <definition name="registration" extends="baseLayout">
         <put-attribute name="title" value="Cinema"/>
         <put-attribute name="heading" value="Cinema"/>
-        <put-attribute name="tagline" value="Please, fill in registration form"/>
+        <put-attribute name="tagline" value="Registration form"/>
         <put-attribute name="content" value="/WEB-INF/views/registration.jsp"/>
     </definition>
 

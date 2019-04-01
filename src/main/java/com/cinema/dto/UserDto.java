@@ -1,17 +1,26 @@
 package com.cinema.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class UserDto {
 
+    @NotNull
+    @NotEmpty
     private String login;
 
+    @NotNull
+    @NotEmpty
     private String password;
+    private String matchingPassword;
 
     public UserDto() {
     }
 
-    public UserDto(String login, String password) {
+    public UserDto(@NotNull @NotEmpty String login, @NotNull @NotEmpty String password, String matchingPassword) {
         this.login = login;
         this.password = password;
+        this.matchingPassword = matchingPassword;
     }
 
     public String getLogin() {
@@ -28,5 +37,13 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;
     }
 }

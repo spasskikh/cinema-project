@@ -36,6 +36,9 @@ dependencies {
             'org.springframework.security:spring-security-web:5.1.4.RELEASE',
             'org.springframework.security:spring-security-taglibs:5.1.4.RELEASE',
 
+            /*For DTO validation*/
+            'javax.validation:validation-api:2.0.1.Final',
+
             /*JSPs and Tiles*/
             'org.jasypt:jasypt:1.9.2',
             'jstl:jstl:1.2',

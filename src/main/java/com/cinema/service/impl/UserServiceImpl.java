@@ -1,10 +1,11 @@
 package com.cinema.service.impl;
 
-import com.cinema.dto.UserDto;
 import com.cinema.model.dao.UserDao;
 import com.cinema.model.entity.User;
 import com.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -45,15 +46,18 @@ public class UserServiceImpl implements UserService {
     public User findByLogin(String login) {
         User byLogin = userDao.findByLogin(login);
         if (byLogin == null) {
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("User not found.");
         }
         return byLogin;
     }
 
     @Override
-    public void checkPassword(UserDto user, User foundUser) {
-
+    public UserDetails loadUserByUsername(String username) {
+        User user = findByLogin(username);
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getLogin())
+                .password(new BCryptPasswordEncoder().encode(user.getPassword()))
+                .roles(user.getRole().getRoleName())
+                .build();
     }
-
-
 }
