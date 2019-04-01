@@ -10,20 +10,32 @@ repositories {
 }
 
 dependencies {
+
+            /*Connection to DB, connection pool, entity mapping and schema creating*/
     compile 'mysql:mysql-connector-java:8.0.12',
             'commons-dbcp:commons-dbcp:1.4',
             'org.hibernate:hibernate-core:5.4.0.Final',
             'org.hibernate:hibernate-entitymanager:5.4.0.Final',
+
+            /*Logging*/
             'org.apache.logging.log4j:log4j-api:2.11.1',
             'org.apache.logging.log4j:log4j-core:2.11.1',
+
             'org.springframework:spring-webmvc:5.1.5.RELEASE',
             'org.springframework:spring-jdbc:5.1.5.RELEASE',
             'org.springframework:spring-orm:5.1.5.RELEASE',
             'org.springframework.data:spring-data-jpa:2.1.5.RELEASE',
-            
+
+            /*JSON and XML mapping and parsing*/
             'org.springframework:spring-oxm:5.1.5.RELEASE',
             'org.codehaus.jackson:jackson-mapper-asl:1.9.13',
             'com.fasterxml.jackson.core:jackson-databind:2.9.8',
+
+            /*Spring Security*/
+            'org.springframework.security:spring-security-config:5.1.4.RELEASE',
+            'org.springframework.security:spring-security-web:5.1.4.RELEASE',
+
+            /*JSPs and Tiles*/
             'org.jasypt:jasypt:1.9.2',
             'jstl:jstl:1.2',
             'org.apache.tiles:tiles-extras:3.0.8'
