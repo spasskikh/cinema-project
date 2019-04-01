@@ -34,6 +34,7 @@ dependencies {
             /*Spring Security*/
             'org.springframework.security:spring-security-config:5.1.4.RELEASE',
             'org.springframework.security:spring-security-web:5.1.4.RELEASE',
+            'org.springframework.security:spring-security-taglibs:5.1.4.RELEASE',
 
             /*JSPs and Tiles*/
             'org.jasypt:jasypt:1.9.2',
