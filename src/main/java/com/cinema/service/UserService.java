@@ -1,5 +1,6 @@
 package com.cinema.service;
 
+import com.cinema.dto.UserDto;
 import com.cinema.model.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -19,4 +20,5 @@ public interface UserService extends UserDetailsService {
 
     User findByLogin(String login);
 
+    void registerNewUser(UserDto userDto);
 }
