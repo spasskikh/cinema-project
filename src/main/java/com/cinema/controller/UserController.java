@@ -4,6 +4,8 @@ import com.cinema.dto.UserDto;
 import com.cinema.model.entity.User;
 import com.cinema.model.entity.UserRole;
 import com.cinema.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UserService userService;
@@ -34,18 +38,13 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("user") @Valid UserDto userDto, BindingResult result) {
-        if (isValid(userDto, result)) {
-            User newUser = new User();
-            newUser.setLogin(userDto.getLogin());
-            newUser.setPassword(userDto.getPassword());
-            newUser.setRole(new UserRole(2L, "USER"));
-            userService.create(newUser);
+        try {
+            if (result.hasErrors()) throw new IllegalArgumentException("Incorrect input data");
+            userService.registerNewUser(userDto);
             return "login";
+        } catch (IllegalArgumentException exc) {
+            LOGGER.error("Incorrect input data", exc);
+            return "registration";
         }
-        return "registration";
-    }
-
-    private boolean isValid(UserDto userDto, BindingResult result) {
-        return !result.hasErrors() && userDto.getPassword().equals(userDto.getMatchingPassword());
     }
 }
