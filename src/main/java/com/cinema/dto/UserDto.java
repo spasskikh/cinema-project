@@ -1,5 +1,6 @@
 package com.cinema.dto;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -12,6 +13,7 @@ public class UserDto {
     @NotNull
     @NotEmpty
     private String password;
+
     private String matchingPassword;
 
     public UserDto() {
@@ -45,5 +47,10 @@ public class UserDto {
 
     public void setMatchingPassword(String matchingPassword) {
         this.matchingPassword = matchingPassword;
+    }
+
+    @AssertTrue
+    private boolean isValid() {
+        return password != null && password.equals(matchingPassword);
     }
 }
