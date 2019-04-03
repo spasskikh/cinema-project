@@ -1,7 +1,6 @@
 package com.cinema.service;
 
 import com.cinema.model.entity.Seat;
-import org.omg.PortableServer.LIFESPAN_POLICY_ID;
 
 import java.util.List;
 

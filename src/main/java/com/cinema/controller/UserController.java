@@ -3,7 +3,6 @@ package com.cinema.controller;
 import com.cinema.dto.UserDto;
 import com.cinema.model.entity.User;
 import com.cinema.model.entity.UserRole;
-import com.cinema.service.UserRoleService;
 import com.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,54 +1,34 @@
 plugins {
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
     id 'java'
-    id 'war'
 }
 
-sourceCompatibility = 1.8
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'commons-dbcp:commons-dbcp:1.4'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-            /*Connection to DB, connection pool, entity mapping and schema creating*/
-    compile 'mysql:mysql-connector-java:8.0.12',
-            'commons-dbcp:commons-dbcp:1.4',
-            'org.hibernate:hibernate-core:5.4.0.Final',
-            'org.hibernate:hibernate-entitymanager:5.4.0.Final',
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.17'
+    
+    implementation 'jstl:jstl:1.2'
+    implementation 'org.apache.tiles:tiles-extras:3.0.8'
+    implementation 'org.springframework.security:spring-security-taglibs:5.1.4.RELEASE'
 
-            /*Logging*/
-            'org.apache.logging.log4j:log4j-api:2.11.1',
-            'org.apache.logging.log4j:log4j-core:2.11.1',
+    runtimeOnly 'mysql:mysql-connector-java'
 
-            'org.springframework:spring-webmvc:5.1.5.RELEASE',
-            'org.springframework:spring-jdbc:5.1.5.RELEASE',
-            'org.springframework:spring-orm:5.1.5.RELEASE',
-            'org.springframework.data:spring-data-jpa:2.1.5.RELEASE',
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.2.0'
 
-            /*JSON and XML mapping and parsing*/
-            'org.springframework:spring-oxm:5.1.5.RELEASE',
-            'org.codehaus.jackson:jackson-mapper-asl:1.9.13',
-            'com.fasterxml.jackson.core:jackson-databind:2.9.8',
-
-            /*Spring Security*/
-            'org.springframework.security:spring-security-config:5.1.4.RELEASE',
-            'org.springframework.security:spring-security-web:5.1.4.RELEASE',
-            'org.springframework.security:spring-security-taglibs:5.1.4.RELEASE',
-
-            /*For DTO validation*/
-            'javax.validation:validation-api:2.0.1.Final',
-
-            /*JSPs and Tiles*/
-            'org.jasypt:jasypt:1.9.2',
-            'jstl:jstl:1.2',
-            'org.apache.tiles:tiles-extras:3.0.8'
-
-    providedCompile 'javax.servlet:javax.servlet-api:4.0.1',
-            'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
-
-    testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0',
-            'org.junit.jupiter:junit-jupiter-params:5.2.0',
-            'org.mockito:mockito-core:2.21.0',
-            'org.springframework:spring-test:5.1.5.RELEASE'
 }

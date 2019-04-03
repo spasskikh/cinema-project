@@ -12,7 +12,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "movie")
-@XmlRootElement
 public class Movie implements Serializable {
 
     @Id

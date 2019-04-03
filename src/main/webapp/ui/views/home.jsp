@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-
 <div class="container" ng-app="moviesApp">
     <div ng-controller="moviesCtrl" ng-init="getAllMovies()">
         <div class="row row-eq-height">

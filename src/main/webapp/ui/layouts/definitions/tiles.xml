@@ -5,11 +5,11 @@
 
 <tiles-definitions>
 
-    <definition name="baseLayout" template="/WEB-INF/layouts/template/baseLayout.jsp">
+    <definition name="baseLayout" template="/ui/layouts/template/baseLayout.jsp">
         <put-attribute name="title" value=""/>
         <put-attribute name="heading" value=""/>
         <put-attribute name="tagline" value=""/>
-        <put-attribute name="navigation" value="/WEB-INF/layouts/template/navigation.jsp"/>
+        <put-attribute name="navigation" value="/ui/layouts/template/navigation.jsp"/>
         <put-attribute name="content" value=""/>
     </definition>
 
@@ -17,28 +17,28 @@
         <put-attribute name="title" value="Cinema"/>
         <put-attribute name="heading" value="Cinema"/>
         <put-attribute name="tagline" value="Welcome to the best cinema"/>
-        <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
+        <put-attribute name="content" value="/ui/views/home.jsp"/>
     </definition>
 
     <definition name="movie" extends="baseLayout">
         <put-attribute name="title" value="Cinema"/>
         <put-attribute name="heading" value="Cinema"/>
         <put-attribute name="tagline" value="Welcome to the best cinema"/>
-        <put-attribute name="content" value="/WEB-INF/views/movie.jsp"/>
+        <put-attribute name="content" value="/ui/views/movie.jsp"/>
     </definition>
 
     <definition name="login" extends="baseLayout">
         <put-attribute name="title" value="Cinema"/>
         <put-attribute name="heading" value="Cinema"/>
         <put-attribute name="tagline" value="Login form"/>
-        <put-attribute name="content" value="/WEB-INF/views/login.jsp"/>
+        <put-attribute name="content" value="/ui/views/login.jsp"/>
     </definition>
 
     <definition name="registration" extends="baseLayout">
         <put-attribute name="title" value="Cinema"/>
         <put-attribute name="heading" value="Cinema"/>
         <put-attribute name="tagline" value="Registration form"/>
-        <put-attribute name="content" value="/WEB-INF/views/registration.jsp"/>
+        <put-attribute name="content" value="/ui/views/registration.jsp"/>
     </definition>
 
 
