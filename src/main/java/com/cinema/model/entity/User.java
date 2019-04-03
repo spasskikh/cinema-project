@@ -1,5 +1,6 @@
 package com.cinema.model.entity;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -134,5 +135,30 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 '}';
+    }
+
+    public static Builder newBuilder() {
+        return new User().new Builder();
+    }
+
+    public class Builder {
+
+        private Builder() {
+        }
+
+        public Builder setLogin(String login) {
+            User.this.setLogin(login);
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            User.this.setPassword(password);
+            return this;
+        }
+
+        public User build() {
+            User.this.setRole(new UserRole(2L, "USER"));
+            return User.this;
+        }
     }
 }
