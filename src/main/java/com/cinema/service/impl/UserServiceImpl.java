@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        User user = userDao.findByLogin(username);
+        User user = findByLogin(username);
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getLogin())
                 .password(new BCryptPasswordEncoder().encode(user.getPassword()))
