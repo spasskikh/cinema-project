@@ -1,40 +1,27 @@
 package com.cinema.service;
 
-//import com.other.WebApplicationContextConfig;
 import com.cinema.model.entity.Seat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.web.WebAppConfiguration;
 
-import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 
 @DirtiesContext
-@ExtendWith(SpringExtension.class)
-//@ContextConfiguration(classes = WebApplicationContextConfig.class)
-@WebAppConfiguration
+@SpringBootTest
 class TestSeatService {
 
-    @Resource
-    private EntityManagerFactory entityManagerFactory;
-    private EntityManager entityManager;
-
-    @Resource
+    @Autowired
     private SeatService seatService;
     private Seat seat;
 
     @BeforeEach
     void setUp() {
-        entityManager = entityManagerFactory.createEntityManager();
         seat = new Seat(21L, 1);
     }
 
@@ -78,8 +65,8 @@ class TestSeatService {
 
     @Test
     void test_getFreeSeats() {
-        List<Long> seatsId = Arrays.asList(1L,2L,3L);
+        List<Long> seatsId = Arrays.asList(1L, 2L, 3L);
 
-        Assertions.assertNotEquals(20,seatService.getFreeSeats(seatsId).size());
+        Assertions.assertNotEquals(20, seatService.getFreeSeats(seatsId).size());
     }
 }
