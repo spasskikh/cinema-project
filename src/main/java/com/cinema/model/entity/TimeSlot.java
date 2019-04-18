@@ -101,4 +101,9 @@ public class TimeSlot implements Serializable {
     public int hashCode() {
         return Objects.hash(id, startTime, endTime);
     }
+
+    @Override
+    public String toString() {
+        return String.format("TimeSlot{id=%d, startTime=%s, endTime=%s", id, startTime, endTime);
+    }
 }

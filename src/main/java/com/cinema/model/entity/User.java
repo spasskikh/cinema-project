@@ -128,12 +128,7 @@ public class User implements Serializable {
      */
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
+        return String.format("User{id=%d, login=%s, password=%s, role=%s", id, login, password, role);
     }
 
     public static Builder newBuilder() {

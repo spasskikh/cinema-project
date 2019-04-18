@@ -79,4 +79,9 @@ public class Seat implements Serializable {
     public int hashCode() {
         return Objects.hash(id, number);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Seat{id=%d, number=%d", id, number);
+    }
 }

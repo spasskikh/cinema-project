@@ -125,4 +125,9 @@ public class Showtime implements Serializable {
     public int hashCode() {
         return Objects.hash(id, date, movie, timeSlot);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Showtime{id=%d, date=%s, movie=%s, timeSlot=%s", id, date, movie, timeSlot);
+    }
 }

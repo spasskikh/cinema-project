@@ -85,9 +85,6 @@ public class UserRole implements Serializable {
      */
     @Override
     public String toString() {
-        return "UserRole{" +
-                "id=" + id +
-                ", roleName='" + roleName + '\'' +
-                '}';
+        return String.format("UserRole{id=%d, roleName=%s", id, roleName);
     }
 }

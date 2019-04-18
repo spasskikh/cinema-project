@@ -146,4 +146,9 @@ public class Ticket implements Serializable {
     public int hashCode() {
         return Objects.hash(id, date, user, showtime, seat);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Ticket{id=%d, date=%s, user=%s, showtime=%s, seat=%s}", id, date, user, showtime, seat);
+    }
 }

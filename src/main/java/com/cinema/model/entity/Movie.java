@@ -21,7 +21,7 @@ public class Movie implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column (name = "description")
+    @Column(name = "description")
     private String description;
 
     @Column(name = "year")
@@ -153,12 +153,6 @@ public class Movie implements Serializable {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", year=" + year +
-                ", duration=" + duration +
-                '}';
+        return String.format("Movie{id=%d, name=%s, description=%s, year=%d, duration=%d", id, name, description, year, duration);
     }
 }
