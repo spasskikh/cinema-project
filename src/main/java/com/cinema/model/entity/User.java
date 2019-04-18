@@ -1,6 +1,5 @@
 package com.cinema.model.entity;
 
-import javax.jws.soap.SOAPBinding;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -24,7 +23,7 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(cascade = CascadeType.MERGE, optional = false)
+    @OneToOne
     @JoinColumn(name = "user_role_id")
     private UserRole role;
 
