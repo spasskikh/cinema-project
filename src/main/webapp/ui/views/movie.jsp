@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-5">
             <h3>{{movie.name}}</h3>
-            <p>{{movie.description}}</p>
+            <p style="text-align: justify">{{movie.description}}</p>
             <p><strong>Year : </strong>{{movie.year}}</p>
             <p><strong>Duration: </strong> : {{movie.duration}} </p>
             <p>
