@@ -1,6 +1,6 @@
 package com.cinema.config;
 
-import com.cinema.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
@@ -16,21 +15,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserServiceImpl();
-
-    }
+    @Autowired
+    private CustomDaoAuthProvider customDaoAuthProvider;
 
     @Bean
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
-
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(encoder());
+        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password(encoder().encode("admin"))
+                .roles("ADMIN");
+
+        auth.authenticationProvider(customDaoAuthProvider);
     }
 
     @Override
@@ -49,10 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.exceptionHandling().accessDeniedPage("/login?accessDenied");
 
         httpSecurity.authorizeRequests()
-                .antMatchers("/").permitAll()
-//                .antMatchers("/admin/**").access("hasRole('ADMIN')")
-//                .antMatchers("/movies/tickets/order/**").access("hasRole('USER')")
-                ;
+                .antMatchers("/").permitAll();
 
         httpSecurity.csrf().disable();
     }
