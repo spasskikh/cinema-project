@@ -3,10 +3,7 @@ package com.cinema.controller;
 import com.cinema.model.entity.Movie;
 import com.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,12 +14,12 @@ public class MovieRestController {
     @Autowired
     private MovieService movieService;
 
-    @RequestMapping(value = "/movies", method = RequestMethod.GET)
+    @GetMapping(value = "/movies")
     public List<Movie> getAllMovies() {
         return movieService.getAll();
     }
 
-    @RequestMapping(value = "movies/{movieId}", method = RequestMethod.GET)
+    @PostMapping(value = "movies/{movieId}")
     public Movie read(@PathVariable(value = "movieId") Long movieId) {
         return movieService.read(movieId);
     }
